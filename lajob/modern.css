@@ -1,0 +1,202 @@
+/* everything outside of the @media query is designed for mobile devices */
+
+/* variables */
+:root {
+	--accent-color: #844BDA; /* purple */
+	--accent-highlight-color: #BC3FE1; /* vibrant purple */
+	--link-color: #094696; /* dull blue */
+	--link-visted-color: #515151; /* dark grey */
+	--page-color: white;
+	--text-color: black;
+	--title-background-color: var(--text-color);
+	--title-text-color: var(--page-color);
+	--secondary-element-color: #DDDDDD; /* light grey */
+	--site-background-color: #E3DEF3; /* light purple */
+}
+
+html, body { 
+	margin: 0; 
+}
+
+body {
+	background-color: var(--site-background-color);
+	border-bottom: .5rem solid var(--accent-color);
+	color: var(--text-color);
+	font-family: -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif; 
+	font-size: 120%; /* for mobile devices */
+	line-height: 1.5;
+	margin: 0;
+}
+
+a {
+	color: var(--link-color);
+}
+
+a:hover {
+	color: var(--text-color);
+	background-color: var(--site-background-color);
+}
+
+a:visited {
+	color: var(--link-visted-color);
+}
+
+::selection { /* change text selection highlight colour */
+	background-color: var(--secondary-element-color);
+}
+
+h1, h2, h3 {
+	display: table;
+	line-height: 1em;
+	margin: 0;
+}
+
+h1 {
+	margin-bottom: 1em;
+}
+
+h2, h3 {
+	margin-top: 1em;
+}
+
+#page {
+	background-color: var(--page-color);
+	box-shadow: 0 0 .05em var(--page-color); /* nothing has pixel-perfect straight lines, this feels more real. */
+	margin: .5rem;
+	padding: 1rem;
+}
+
+#page h1, #page h2, #page h3 {
+	background-color: var(--title-background-color);
+	box-shadow: .5rem .5rem 0 0 var(--site-background-color);
+	color: var(--title-text-color);
+	font-style: italic;
+	font-weight: 900;
+}
+
+#page h1 {	
+	padding: .5em;
+	text-transform: uppercase;
+}
+
+#page h2, #page h3 {
+	padding: .4em;
+}
+
+table {
+	background-color: var(--page-color);
+	border-collapse: collapse;
+	overflow-wrap: break-word;
+}
+
+tr {
+	border-bottom: .1em solid var(--secondary-element-color);
+}
+
+tbody tr:last-child {
+	border-bottom: none;
+}
+
+th, td {
+	border-left: .1em solid var(--secondary-element-color);
+	border-right: .1em solid var(--secondary-element-color);
+	padding: .5em;
+}
+
+th:first-child, td:first-child {
+	border-left: none;
+	padding-left: 0;
+}
+
+th:last-child, td:last-child {
+	border-right: none;
+	padding-right: 0;
+}
+
+hr {
+	background-color: var(--secondary-element-color);
+	border: none;
+	height: .1em;
+	margin: 3em 0;
+}
+
+#policy {
+	font-family: Palatino, Palatino Linotype, Georgia, serif;
+	overflow-wrap: break-word;
+}
+
+#policy h1, #policy h2, #policy h3 {
+	background-color: var(--page-color);
+	box-shadow: none;
+	color: var(--text-color);
+	font-style: normal;
+	padding: 0;
+}
+
+#policy h1 {
+	padding-top: .1em;
+}
+
+#policy ol, #policy ul {
+	list-style-position: outside;
+	padding: 0 0 0 1.5em;
+}
+  
+address {
+	font-style: normal;
+}
+
+.contact_info {
+	font-weight: bold;
+}
+
+.contact_info .email {
+	font-weight: normal;
+}
+
+.email {
+	text-decoration: underline;
+	text-decoration-color: var(--secondary-element-color);
+}
+
+footer {
+	font-size: 80%;
+	margin: 0;
+	padding: 1rem 1.5rem;
+}
+
+/* ------------------------------------------------------------------------------------ */
+
+@media screen and (min-width: 721px) {
+/* everything inside this media query, is designed for non-mobile devices */
+
+body {
+	font-size: 130%; /* reset from above */
+}
+
+main {
+	margin: 0 auto;
+	max-width: 55ch;
+}
+
+#page {
+	margin: 2rem; 
+	padding: 3rem;
+}
+
+footer {
+	margin: 0; 
+	padding: 1rem 2rem 2rem 2rem;
+}
+
+}
+
+/* ------------------------------------------------------------------------------------ */
+
+@media print {
+
+body {
+	font-size: 100%; /* reset from above */
+}
+
+}
