@@ -1,0 +1,441 @@
+/* everything outside of the @media query is shared for all device sizes */
+
+/* variables */
+:root {
+color-scheme: light dark;
+--accent-color: #FFD60A; /* vibrant yellow */
+--accent-highlight-color: #FFF899; /* lemon tint */
+--border-background-color: var(--accent-color);
+--decoration-color: #5C6773; /* muted slate grey */
+--dither-filter: none;
+--dither-heading-filter: invert(1);
+--font-family-sans-serif: -apple-system, BlinkMacSystemFont, SF Pro Text, SF Pro, system-ui, sans-serif;
+--font-family-serif: Palatino, Palatino Linotype, Georgia, serif;
+--link-color: #094696; /* dull blue */
+--link-visited-color: var(--decoration-color);
+--page-color: white;
+--secondary-element-color: #CBD3DC; /* cool slate */
+--site-background-color: #E2E7ED; /* light grey with subtle blue tinge */
+--text-color: black;
+--title-background-color: #0E1318; /* inky blue-black */
+--title-text-color: var(--page-color);
+}
+
+@media screen and (prefers-color-scheme: dark) {
+:root {
+--accent-highlight-color: #383204; /* dark yellow */
+--decoration-color: #8B98A5; /* muted slate grey */
+--dither-filter: invert(1);
+--link-color: #6E96CF; /* dull slate blue */
+--page-color: #171D25; /* dark slate */
+--secondary-element-color: #2B3542; /* steel slate */
+--site-background-color: #0E1318; /* inky blue-black */
+--text-color: #E6EDF3; /* soft high-contrast white */
+--title-background-color: var(--site-background-color);
+--title-text-color: var(--text-color);
+}
+}
+
+html, body { 
+margin: 0; 
+}
+
+body {
+background-color: var(--site-background-color);
+border-bottom: .5rem solid var(--border-background-color);
+box-sizing: border-box;
+color: var(--text-color);
+display: flex;
+flex-direction: column;
+font-family: var(--font-family-sans-serif);
+font-size: 120%; /* for mobile devices */
+isolation: isolate;
+line-height: 1.5;
+min-height: 100dvh;
+}
+
+body::before {
+background: repeat url("../style/dither.svg") top left;
+content: "";
+filter: var(--dither-filter);
+inset: 0 0 .5rem;
+pointer-events: none;
+position: fixed;
+z-index: -1;
+}
+
+a {
+color: var(--link-color);
+}
+
+a:hover {
+background-color: var(--accent-highlight-color);
+color: var(--text-color);
+}
+
+a:visited {
+color: var(--link-visited-color);
+}
+
+a:visited:hover {
+color: var(--text-color);
+}
+
+a:hover::selection {
+background-color: var(--secondary-element-color);
+}
+
+::selection { /* change text selection highlight colour */
+background-color: var(--accent-highlight-color);
+}
+
+h1, h2, h3 {
+display: table;
+line-height: 1em;
+margin: 0;
+}
+
+h1 {
+margin-bottom: 1em;
+}
+
+h2, h3 {
+margin-top: 1em;
+}
+
+main {
+flex: 1;
+}
+
+#gghf {
+color: color-mix(in srgb, var(--site-background-color) 99.9%, var(--page-color));
+font-size: 0.01%;
+position: absolute;
+z-index: -2;
+}
+
+#gghf::selection {
+background-color: var(--site-background-color);
+}
+
+nav a {
+text-decoration: none;
+}
+
+nav, footer {
+font-size: 80%;
+margin: 0;
+padding: 1rem 1.5rem;
+}
+
+.notice {
+border-left: .1em solid var(--secondary-element-color);
+font-family: var(--font-family-sans-serif);
+margin: 1.5em 0;
+padding: 0 1.25em;
+}
+
+#page {
+background-color: var(--page-color);
+box-shadow: 0 0 .05rem var(--page-color); /* nothing has pixel-perfect straight lines, this feels more real. */
+margin: 0 .5rem;
+padding: 1rem;
+}
+
+#page h1, #page h2, #page h3 {
+background-color: var(--title-background-color);
+box-shadow: .5rem .5rem var(--border-background-color);
+color: var(--title-text-color);
+font-style: italic;
+font-weight: 900;
+isolation: isolate;
+position: relative;
+text-shadow: 0 -.02em .02em var(--border-background-color); /* Inspiration: http://owltastic.com/2009/12/shadows-and-css3/ */
+}
+
+#page h1::before, #page h2::before, #page h3::before {
+background: repeat url("../style/dither.svg") top left;
+content: "";
+filter: var(--dither-heading-filter);
+inset: 0;
+pointer-events: none;
+position: absolute;
+z-index: -1;
+}
+
+#page h1 {	
+padding: .5em;
+text-transform: uppercase;
+}
+
+#page #policy h1 {
+text-transform: none;
+}
+
+#page h2, #page h3 {
+padding: .5em;
+}
+
+table {
+background-color: var(--page-color);
+border-spacing: 0;
+table-layout: fixed;
+width: 100%;
+}
+
+table caption {
+font-weight: bold;
+padding-bottom: 1em;
+text-align: left;
+}
+
+hr {
+background-color: var(--secondary-element-color);
+border: none;
+height: .1em;
+margin: 3rem 0;
+}
+
+#policy {
+font-family: var(--font-family-serif);
+overflow-wrap: break-word;
+}
+
+#policy h1, #policy h2, #policy h3 {
+background-color: var(--page-color);
+box-shadow: none;
+color: var(--text-color);
+font-style: normal;
+padding: 0;
+text-shadow: none;
+}
+
+#policy h1::before, #policy h2::before, #policy h3::before {
+display: none;
+}
+
+#policy h1 {
+padding-top: .1em;
+}
+
+#policy ol, #policy ul {
+list-style-position: outside;
+padding: 0 0 0 1.5em;
+}
+
+#policy ol {
+list-style-type: parentheses-list;
+}
+
+@counter-style parentheses-list {
+fallback: lower-latin;
+prefix: "(";
+suffix: ") ";
+system: extends lower-latin;
+}
+
+address {
+column-gap: 0.5em;
+display: grid;
+font-style: normal;
+grid-template-columns: max-content 1fr;
+}
+
+address .label {
+font-weight: bold;
+text-align: left;
+}
+
+address .email {
+font-weight: normal;
+text-decoration: underline;
+text-decoration-color: var(--secondary-element-color);
+}
+
+/* ------------------------------------------------------------------------------------ */
+
+@media screen and (width <= 720px) {
+/* everything inside this media query, is designed specifically for mobile devices */
+
+thead {
+display: none;
+}
+
+tr {
+border-left: .1rem solid var(--secondary-element-color);
+display: block;
+margin-bottom: 1em;
+padding-left: .5em;
+}
+
+td {
+border: none;
+display: block;
+}
+
+td + td {
+padding-top: .5em;
+}
+
+td::before {
+color: var(--decoration-color);
+content: attr(data-label);
+display: block;
+font-weight: normal;
+}
+
+td:first-child {
+font-weight: bold;
+}
+
+}
+
+/* ------------------------------------------------------------------------------------ */
+
+@media screen and (width > 720px) {
+/* everything inside this media query, is designed for desktop devices */
+
+body {
+font-size: 130%; /* reset from above */
+}
+
+main {
+margin: 0 auto;
+max-width: 55ch;
+}
+
+nav {
+padding: 1rem 2rem 0;
+}
+
+footer {
+padding: 1rem 2rem 2rem;
+}
+
+#page {
+margin: 1rem 2rem;
+padding: 3rem;
+}
+
+table {
+overflow-wrap: break-word;
+}
+
+th, td {
+hyphens: auto;
+}
+
+}
+
+@media print, screen and (width > 720px) {
+/* everything inside this media query, is designed for desktop devices and print */
+
+thead th:nth-child(1) { width: 17.5%; }
+thead th:nth-child(2) { width: 17.5%; }
+thead th:nth-child(3) { width: 30%; }
+thead th:nth-child(4) { width: 35%; }
+
+th, td {
+border-bottom: .1em solid var(--secondary-element-color);
+border-right: .1em solid var(--secondary-element-color);
+padding: .5em;
+}
+
+tbody tr:last-child td {
+border-bottom: none;
+}
+
+th:first-child, td:first-child {
+padding-left: 0;
+}
+
+th:last-child, td:last-child {
+border-right: none;
+padding-right: 0;
+}
+
+}
+
+@media screen and (min-width: 1024px) {
+/* everything inside this media query, is designed for large desktop screens */
+
+table {
+box-shadow: .5rem .5rem var(--secondary-element-color);
+box-sizing: border-box;
+left: 50%;
+margin-bottom: 3rem;
+overflow-wrap: normal;
+padding: 0 3rem 3rem;
+position: relative;
+transform: translateX(-50%);
+width: min(80ch, calc(100vw - 6rem));
+}
+
+caption {
+background-color: var(--page-color);
+box-sizing: border-box;
+margin-top: 1rem;
+padding: 3rem;
+position: relative;
+}
+
+caption::after { /* extend the box shadow up to the caption */
+background-color: var(--secondary-element-color);
+content: "";
+inset: .5rem -.5rem -.5rem auto;
+position: absolute;
+width: .5rem;
+}
+
+th, td {
+hyphens: manual;
+}
+
+}
+
+/* ------------------------------------------------------------------------------------ */
+
+@media print {
+
+:root {
+color-scheme: light;
+--link-color: var(--text-color);
+--link-visited-color: var(--link-color);
+--page-color: white;
+--site-background-color: var(--page-color);
+--text-color: black;
+--title-background-color: var(--page-color);
+--title-text-color: var(--text-color);
+}
+
+body {
+border-bottom: none;
+display: block;
+font-size: 100%; /* reset from above */
+min-height: 0;
+}
+
+body::before {
+display: none;
+}
+
+nav a, #gghf {
+display: none;
+}
+
+hr {
+break-before: page;
+}
+
+#page h1, #page h2, #page h3 {
+box-shadow: none;
+color: var(--text-color);
+padding: 0;
+text-shadow: none;
+}
+
+#page h1::before, #page h2::before, #page h3::before {
+background: none;
+}
+
+}
