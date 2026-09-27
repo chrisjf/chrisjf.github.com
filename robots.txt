@@ -1,0 +1,140 @@
+# 1. Default Rule for Search Engines
+# ---
+
+User-agent: *
+Disallow: /dejure/
+
+# 2. Archival Crawlers
+# ---
+
+# Wayback Machine / Archive.org
+User-agent: ia_archiver
+User-agent: archive.org_bot
+Disallow: /dejure/
+
+# Common Crawl 
+User-agent: CCBot
+Disallow: /dejure/
+
+# Allen Institute for AI (Dolma dataset)
+User-agent: AI2Bot
+User-agent: Ai2Bot-Dolma
+Disallow: /dejure/
+
+# 3. AI Search Engines, RAG Scrapers & Web Extractors
+# ---
+
+# OpenAI Search
+User-agent: OAI-SearchBot
+Disallow: /dejure/
+
+# Anthropic Search
+User-agent: Claude-SearchBot
+Disallow: /dejure/
+
+# Perplexity AI
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+Disallow: /dejure/
+
+# You.com
+User-agent: YouBot
+Disallow: /dejure/
+
+# Tavily Search API
+User-agent: TavilyBot
+Disallow: /dejure/
+
+# Exa AI (formerly Metaphor)
+User-agent: ExaBot
+Disallow: /dejure/
+
+# Firecrawl / Mendable
+User-agent: FirecrawlAgent
+Disallow: /dejure/
+
+# Diffbot
+User-agent: Diffbot
+Disallow: /dejure/
+
+# 4. Frontier LLMs & Model Training Bots
+# ---
+
+# OpenAI (GPT-4, ChatGPT Training & User Fetches)
+User-agent: GPTBot
+User-agent: ChatGPT-User
+Disallow: /dejure/
+
+# Anthropic (Claude Training & Live User Fetches)
+User-agent: ClaudeBot
+User-agent: Claude-User
+User-agent: anthropic-ai
+Disallow: /dejure/
+
+# Google (Gemini Training)
+User-agent: Google-Extended
+Disallow: /dejure/
+
+# Meta (Llama Training & Crawlers)
+User-agent: Meta-ExternalAgent
+User-agent: Meta-ExternalFetcher
+User-agent: FacebookBot
+Disallow: /dejure/
+
+# Apple (Apple Intelligence & Siri Training)
+User-agent: Applebot-Extended
+Disallow: /dejure/
+
+# ByteDance (TikTok)
+User-agent: Bytespider
+User-agent: Byterider
+Disallow: /dejure/
+
+# DeepSeek
+User-agent: DeepSeekBot
+Disallow: /dejure/
+
+# Alibaba (Cloud & Qwen)
+User-agent: QwenBot
+User-agent: Alibaba-Cloud
+User-agent: AliyunSecScan
+Disallow: /dejure/
+
+# Moonshot AI (Kimi)
+User-agent: MoonshotBot
+User-agent: KimiBot
+Disallow: /dejure/
+
+# Z.AI (GLM)
+User-agent: ZhipuAI
+User-agent: ZhipuAI-Bot
+User-agent: ChatGLM
+User-agent: ChatGLM-Spider
+Disallow: /dejure/
+
+# Tencent (Hunyuan)
+User-agent: HunyuanBot
+User-agent: TencentTraveler
+Disallow: /dejure/
+
+# MiniMax
+User-agent: MiniMaxBot
+Disallow: /dejure/
+
+# Baidu (AI & Search)
+User-agent: Baiduspider
+User-agent: Baiduspider-render
+Disallow: /dejure/
+
+# Amazon (AI / AWS)
+User-agent: Amazonbot
+Disallow: /dejure/
+
+# Cohere
+User-agent: cohere-ai
+User-agent: cohere-training-data-crawler
+Disallow: /dejure/
+
+# Mistral
+User-agent: MistralBot
+Disallow: /dejure/

@@ -1,0 +1,557 @@
+/* Base styles: for all device sizes */
+
+/* Variables */
+:root {
+color-scheme: light dark;
+--accent-color: #FFD60A; /* vibrant yellow */
+--box-shadow-offset: .5rem;
+--content-vertical-whitespace: 1rem;
+--decoration-color: #5C6773; /* muted slate grey */
+--decoration-line-thickness: .125rem;
+--decoration-secondary-color: #CBD3DC; /* cool slate */
+--dither-filter: none;
+--dither-heading-filter: invert(1);
+--font-family-sans-serif: -apple-system, BlinkMacSystemFont, SF Pro Text, SF Pro, system-ui, sans-serif;
+--font-family-serif: Palatino, Palatino Linotype, Georgia, serif;
+--link-color: #094696; /* dull blue */
+--link-visited-color: var(--decoration-color);
+--page-background-color: white;
+--site-background-color: #E2E7ED; /* light grey with subtle blue tinge */
+--table-caption-margin: 1rem;
+--text-color: black;
+--text-highlight-background-color: #FFF899; /* lemon tint */
+--title-background-color: #0E1318; /* inky blue-black */
+--title-letter-spacing: -.04em;
+--title-text-color: var(--page-background-color);
+}
+
+@media screen and (prefers-color-scheme: dark) {
+:root {
+--decoration-color: #8B98A5; /* muted slate grey */
+--decoration-secondary-color: #2B3542; /* steel slate */
+--dither-filter: invert(1);
+--link-color: #6E96CF; /* dull slate blue */
+--page-background-color: #171D25; /* dark slate */
+--site-background-color: #0E1318; /* inky blue-black */
+--text-color: #E6EDF3; /* soft white */
+--text-highlight-background-color: #383204; /* dark yellow */
+--title-background-color: var(--site-background-color);
+--title-text-color: var(--text-color);
+}
+}
+
+html, body { 
+margin: 0; 
+}
+
+body {
+background-color: var(--site-background-color);
+border-bottom: .5rem solid var(--accent-color);
+box-sizing: border-box;
+color: var(--text-color);
+display: flex;
+flex-direction: column;
+font-family: var(--font-family-sans-serif);
+font-size: 120%; /* For mobile devices */
+isolation: isolate;
+line-height: 160%;
+min-height: 100dvh;
+}
+
+body::before {
+background: repeat url("../style/dither.svg") top left;
+content: "";
+filter: var(--dither-filter);
+inset: 0 0 .5rem;
+pointer-events: none;
+position: fixed;
+z-index: -1;
+}
+
+::selection {
+background-color: var(--text-highlight-background-color);
+}
+
+/* ------------------------------------------------------------------------------------ */
+/* Links */
+
+a {
+color: var(--link-color);
+}
+
+a:hover {
+background-color: var(--text-highlight-background-color);
+color: var(--text-color);
+}
+
+a:visited {
+color: var(--link-visited-color);
+}
+
+a:visited:hover {
+color: var(--text-color);
+}
+
+a:hover::selection {
+background-color: var(--decoration-secondary-color);
+}
+
+/* ------------------------------------------------------------------------------------ */
+/* Titles */
+
+.title {
+background-color: var(--title-background-color);
+box-sizing: border-box;
+color: var(--title-text-color);
+font-style: italic;
+font-weight: 900;
+isolation: isolate;
+letter-spacing: var(--title-letter-spacing);
+line-height: 100%;
+max-width: 100%;
+overflow-wrap: anywhere;
+padding: .625em;
+position: relative;
+text-shadow: 0 -.02em .02em var(--accent-color); /* Inspiration: http://owltastic.com/2009/12/shadows-and-css3/ */
+width: fit-content;
+}
+
+.title::before {
+background: repeat url("../style/dither.svg") top left;
+content: "";
+filter: var(--dither-heading-filter);
+inset: 0;
+pointer-events: none;
+position: absolute;
+z-index: -1;
+}
+
+.title::after {
+background-color: var(--accent-color);
+}
+
+.title::after, table::after {
+/* Create the box shadow */
+clip-path: polygon(calc(100% - var(--box-shadow-offset)) 0, 100% var(--box-shadow-offset), 100% 100%, var(--box-shadow-offset) 100%, 0 calc(100% - var(--box-shadow-offset)), calc(100% - var(--box-shadow-offset)) calc(100% - var(--box-shadow-offset)));
+content: "";
+inset: 0 calc(-1 * var(--box-shadow-offset)) calc(-1 * var(--box-shadow-offset)) 0;
+pointer-events: none;
+position: absolute;
+z-index: -1;
+}
+
+.title-wordmark {
+font-size: min(2em, 7vw);
+overflow-wrap: normal;
+text-box: trim-both cap alphabetic;
+text-transform: uppercase;
+}
+
+/* ------------------------------------------------------------------------------------ */
+/* Header */
+
+nav {
+font-size: 80%;
+line-height: 160%;
+padding: 1.5rem;
+}
+
+nav a {
+text-decoration: none;
+}
+
+/* ------------------------------------------------------------------------------------ */
+/* Page */
+
+main {
+flex: 1;
+}
+
+.gghf {
+color: color-mix(in srgb, var(--site-background-color) 99.9%, var(--page-background-color));
+font-size: 0.01%;
+position: absolute;
+z-index: -2;
+}
+
+.gghf::selection {
+background-color: var(--site-background-color);
+}
+
+.notice {
+font-family: var(--font-family-sans-serif);
+margin: calc(2 * var(--content-vertical-whitespace)) 0;
+padding: 0 1.25em;
+padding-inline-start: calc(1.25em + var(--decoration-line-thickness));
+position: relative;
+text-box: trim-both text;
+}
+
+.notice::before {
+border-inline-start: var(--decoration-line-thickness) solid var(--decoration-secondary-color);
+content: "";
+inset-block: 0;
+inset-inline-start: 0;
+pointer-events: none;
+position: absolute;
+}
+
+.page {
+background-color: var(--page-background-color);
+box-shadow: 0 0 .05rem var(--page-background-color); /* nothing has pixel-perfect straight lines, this feels more real. */
+margin: 0 .5rem;
+overflow-wrap: anywhere;
+padding: 1rem 2rem;
+}
+
+hr {
+background-color: var(--decoration-secondary-color);
+border: none;
+height: var(--decoration-line-thickness);
+margin: calc(2 * var(--content-vertical-whitespace)) 0;
+}
+
+.policy {
+font-family: var(--font-family-serif);
+overflow-wrap: break-word;
+}
+
+address {
+align-items: baseline;
+column-gap: .5em;
+display: grid;
+font-style: normal;
+grid-template-columns: fit-content(50%) minmax(0, 1fr);
+}
+
+address > span {
+overflow-wrap: anywhere;
+}
+
+address .label {
+font-weight: bold;
+text-align: left;
+}
+
+.email {
+font-weight: normal;
+text-decoration: underline;
+text-decoration-color: var(--decoration-secondary-color);
+}
+
+/* ------------------------------------------------------------------------------------ */
+/* Lists */
+
+.page :where(ul, ol) {
+margin-inline: 0;
+padding-inline: 0;
+}
+
+.page ul {
+list-style-type: square;
+}
+
+.page :where(ul, ol) :where(ul, ol) {
+margin-block: var(--content-vertical-whitespace) 0;
+padding-inline-start: 1.5em;
+}
+
+.policy ol {
+list-style-type: parentheses-list;
+}
+
+@counter-style parentheses-list {
+fallback: lower-latin;
+prefix: "(";
+suffix: ") ";
+system: extends lower-latin;
+}
+
+/* ------------------------------------------------------------------------------------ */
+/* Tables */
+
+table {
+background-color: var(--page-background-color);
+border-spacing: 0;
+table-layout: fixed;
+width: 100%;
+}
+
+table::after {
+display: none; /* For mobile */
+}
+
+table caption {
+font-weight: bold;
+padding-block-end: 1em;
+text-align: left;
+}
+
+/* ------------------------------------------------------------------------------------ */
+/* Content vertical whitespace */
+
+h1 {
+font-size: 200%;
+}
+
+h2 {
+font-size: 150%;
+}
+
+h3 {
+font-size: 125%;
+}
+
+h4 {
+font-size: 112.5%;
+}
+
+h5, h6 {
+font-size: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+line-height: 120%;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+margin: 0;
+}
+
+.page > :where(ul, ol, dl), .page section > :where(ul, ol, dl) {
+margin-block: 0;
+}
+
+.page > :where(:not(hr)) + :where(:not(hr)), .page section > :where(:not(hr)) + :where(:not(hr)) {
+margin-block-start: var(--content-vertical-whitespace);
+}
+
+.page :is(p, ul, ol, dl, address, table) + :is(h1, h2, h3, h4, h5, h6), .page > section + section {
+/* Double the usual gap before headings that follow body content and between
+sections, to make new topics easier to spot. Consecutive headings, such as a
+page title and its first subheading, keep the usual gap so they stay grouped. */
+margin-block-start: calc(2 * var(--content-vertical-whitespace));
+}
+
+.page > .title + :where(:not(hr)), .page section > .title + :where(:not(hr)) {
+/* Reserve the box shadow's depth as well as the content gap. */
+margin-block-start: calc(var(--content-vertical-whitespace) + var(--box-shadow-offset));
+}
+
+.page > :where(:not(hr)) + .notice, .page section > :where(:not(hr)) + .notice, .page > .notice + :where(:not(hr)), .page section > .notice + :where(:not(hr)) {
+margin-block-start: calc(2 * var(--content-vertical-whitespace));
+}
+
+.page > .title + .notice, .page section > .title + .notice {
+margin-block-start: calc(2 * var(--content-vertical-whitespace) + var(--box-shadow-offset));
+}
+
+.page li + li {
+margin-block-start: .25em;
+}
+
+/* ------------------------------------------------------------------------------------ */
+/* Footer */
+
+footer {
+padding: 1rem 1.5rem;
+text-align: right;
+}
+
+footer p {
+font-size: 80%;
+line-height: 160%;
+}
+
+/* ------------------------------------------------------------------------------------ */
+/* Mobile: styles for mobile screens */
+
+@media screen and (width <= 720px) {
+.page {
+padding-block: 2rem;
+}
+
+thead {
+display: none;
+}
+
+tr {
+border-left: var(--decoration-line-thickness) solid var(--decoration-secondary-color);
+display: block;
+margin-bottom: 1em;
+padding-left: .5em;
+}
+
+td {
+border: none;
+display: block;
+padding-block: 0;
+padding-inline: 0;
+}
+
+td + td {
+padding-block-start: .5em;
+}
+
+td::before {
+color: var(--decoration-color);
+content: attr(data-label);
+display: block;
+font-weight: normal;
+}
+
+td:first-child {
+font-weight: bold;
+}
+
+}
+
+/* ------------------------------------------------------------------------------------ */
+/* Desktop: styles for desktop screens */
+
+@media screen and (width > 720px) {
+body {
+font-size: 130%; /* reset from above */
+}
+
+main {
+margin: 0 auto;
+max-width: 55ch;
+width: 100%;
+}
+
+nav {
+padding: 2rem 2rem 0;
+}
+
+footer {
+padding: 1rem 2rem 2rem;
+}
+
+.page {
+margin: 1rem 2rem;
+padding: 3rem;
+}
+
+table {
+overflow-wrap: break-word;
+}
+
+th, td {
+hyphens: auto;
+}
+
+}
+
+/* ------------------------------------------------------------------------------------ */
+/* Desktop and print: shared styles */
+
+@media print, screen and (width > 720px) {
+thead th:nth-child(1) { width: 17.5%; }
+thead th:nth-child(2) { width: 17.5%; }
+thead th:nth-child(3) { width: 30%; }
+thead th:nth-child(4) { width: 35%; }
+
+th, td {
+border-bottom: var(--decoration-line-thickness) solid var(--decoration-secondary-color);
+border-right: var(--decoration-line-thickness) solid var(--decoration-secondary-color);
+padding: .5em;
+vertical-align: top;
+}
+
+tbody tr:last-child td {
+border-bottom: none;
+}
+
+th:first-child, td:first-child {
+padding-left: 0;
+}
+
+th:last-child, td:last-child {
+border-right: none;
+padding-right: 0;
+}
+
+}
+
+/* ------------------------------------------------------------------------------------ */
+/* Large desktop: styles for wider screens */
+
+@media screen and (width >= 1024px) {
+table {
+box-sizing: border-box;
+left: 50%;
+margin-bottom: calc(2 * var(--content-vertical-whitespace));
+overflow-wrap: normal;
+padding: 0 3rem 3rem;
+position: relative;
+transform: translateX(-50%);
+width: min(80ch, calc(100vw - 6rem));
+}
+
+table::after {
+background-color: var(--decoration-secondary-color);
+display: block;
+top: var(--table-caption-margin);
+}
+
+caption {
+background-color: var(--page-background-color);
+box-sizing: border-box;
+margin-top: var(--table-caption-margin);
+padding: 3rem;
+}
+
+th, td {
+hyphens: manual;
+}
+
+}
+
+/* ------------------------------------------------------------------------------------ */
+/* Print: styles for printed pages */
+
+@media print {
+
+:root {
+color-scheme: light;
+--box-shadow-offset: 0rem;
+--link-color: var(--text-color);
+--link-visited-color: var(--link-color);
+--page-background-color: white;
+--site-background-color: var(--page-background-color);
+--text-color: black;
+--title-background-color: var(--page-background-color);
+--title-text-color: var(--text-color);
+}
+
+body {
+border-bottom: none;
+display: block;
+font-size: 100%; /* reset from above */
+min-height: 0;
+}
+
+body::before {
+display: none;
+}
+
+nav, .gghf {
+display: none;
+}
+
+hr {
+break-before: page;
+}
+
+.title {
+color: var(--text-color);
+padding: 0;
+text-shadow: none;
+}
+
+.title::before, .title::after {
+display: none;
+}
+
+}
