@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang=en-CA>
+<head>
+
+<meta charset=utf-8>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>404, Ceci n’est pas une page, Chris Creates Apps</title>
+
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+<style>
+/* Base styles */
+:root {
+color-scheme: light dark;
+--accent-color: #FFD60A; /* Vibrant yellow */
+--box-shadow-offset: .5rem;
+--decoration-color: #5C6773; /* Muted slate grey */
+--decoration-secondary-color: #CBD3DC; /* Cool slate */
+--font-family-sans-serif: -apple-system, BlinkMacSystemFont, SF Pro Text, SF Pro, system-ui, sans-serif;
+--font-family-script: "Snell Roundhand", "Apple Chancery", cursive;
+--link-color: #094696; /* Dull blue */
+--link-underline-color: color-mix(in srgb, var(--page-background-color) 50%, transparent);
+--link-visited-color: var(--decoration-color);
+--navigation-separator-gap: .5rem;
+--page-background-color: white;
+--page-gutter: 2rem;
+--page-vertical-whitespace: 1rem;
+--text-color: black;
+--text-highlight-background-color: #FFF899; /* Lemon tint */
+--text-shadow-color: color-mix(in srgb, var(--page-background-color) 50%, transparent);
+--title-background-color: #0E1318; /* Inky blue-black */
+--title-letter-spacing: -.04em;
+--title-text-color: var(--page-background-color);
+}
+
+@media screen and (prefers-color-scheme: dark) {
+
+:root {
+--decoration-color: #8B98A5; /* Muted slate grey */
+--decoration-secondary-color: #2B3542; /* Steel slate */
+--link-color: #6E96CF; /* Dull slate blue */
+--page-background-color: #171D25; /* Dark slate */
+--text-color: #E6EDF3; /* Soft white */
+--text-highlight-background-color: #383204; /* Dark yellow */
+--title-text-color: var(--text-color);
+}
+
+}
+
+html, body {
+margin: 0;
+padding: 0;
+}
+
+body {
+background-color: var(--page-background-color);
+border-bottom: .5rem solid var(--accent-color);
+box-sizing: border-box;
+color: var(--text-color);
+display: flex;
+flex-direction: column;
+font-family: var(--font-family-sans-serif);
+font-size: 120%;
+line-height: 160%;
+min-height: 100svh;
+text-shadow: 0 1px 1px var(--text-shadow-color);
+}
+
+::selection {
+background-color: var(--text-highlight-background-color);
+}
+
+a {
+border-bottom: 1px solid var(--link-underline-color);
+color: var(--link-color);
+text-decoration: none;
+}
+
+a:visited {
+color: var(--link-visited-color);
+}
+
+a:hover {
+border-bottom-color: var(--text-color);
+color: var(--text-color);
+}
+
+a:focus-visible {
+outline: 2px solid var(--link-color);
+outline-offset: .2em;
+}
+
+#content {
+flex: 1;
+}
+
+main {
+display: flex;
+flex-wrap: wrap;
+gap: var(--page-gutter);
+padding: var(--page-vertical-whitespace) var(--page-gutter);
+}
+
+main > section {
+flex: 1 1 240px;
+}
+
+main > section > p:first-child {
+margin-bottom: var(--page-vertical-whitespace);
+margin-top: 0;
+}
+
+main > section > a {
+position: relative;
+}
+
+main > section > a::before {
+content: "\2039" / "";
+inset-inline-end: 100%;
+margin-inline-end: var(--navigation-separator-gap);
+position: absolute;
+}
+
+header {
+padding: var(--page-gutter) var(--page-gutter) 0;
+}
+
+footer {
+align-self: flex-end;
+box-sizing: border-box;
+max-width: 100%;
+padding: var(--page-gutter);
+padding-bottom: calc(var(--page-gutter) + var(--box-shadow-offset));
+padding-right: calc(var(--page-gutter) + var(--box-shadow-offset));
+}
+
+footer h1 {
+background-color: var(--title-background-color);
+box-sizing: border-box;
+color: var(--title-text-color);
+font-size: clamp(1rem, 7vw, 2.5rem);
+font-style: italic;
+font-weight: 900;
+isolation: isolate;
+letter-spacing: var(--title-letter-spacing);
+line-height: 100%;
+margin: 0;
+max-width: 100%;
+overflow-wrap: anywhere;
+padding: .625em;
+position: relative;
+text-shadow: 0 -.02em .02em var(--accent-color);
+text-transform: uppercase;
+width: fit-content;
+}
+
+footer h1::after {
+background-color: var(--accent-color);
+clip-path: polygon(calc(100% - var(--box-shadow-offset)) 0, 100% var(--box-shadow-offset), 100% 100%, var(--box-shadow-offset) 100%, 0 calc(100% - var(--box-shadow-offset)), calc(100% - var(--box-shadow-offset)) calc(100% - var(--box-shadow-offset)));
+content: "";
+inset: 0 calc(-1 * var(--box-shadow-offset)) calc(-1 * var(--box-shadow-offset)) 0;
+pointer-events: none;
+position: absolute;
+z-index: -1;
+}
+
+#image {
+text-align: center;
+}
+
+#image svg {
+max-width: 100%;
+width: 20rem;
+}
+
+#image h1 {
+all: unset;
+display: block;
+font-family: var(--font-family-script);
+font-size: 200%;
+margin-block: var(--page-vertical-whitespace);
+}
+
+/* ------------------------------------------------------------------------------------ */
+/* Desktop styles */
+@media screen and (width > 720px) {
+#content {
+flex: none;
+margin-block: auto;
+padding-block: calc(2 * var(--page-vertical-whitespace));
+}
+
+header {
+padding-top: 0;
+}
+
+main {
+margin: 0 auto;
+max-width: 55ch;
+}
+}
+</style>
+
+</head>
+<body>
+
+<div id=content>
+
+<header id=image>
+
+<!-- Changes were made to the SVG image below. Credit: https://github.com/twitter/twemoji/blob/master/assets/svg/1f4d6.svg Original Image License: CC BY 4.0 https://creativecommons.org/licenses/by/4.0/ New Image License: Copyright 2026. All Rights Reserved. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 4 36 27" role="img" aria-labelledby="svg-title"><title id="svg-title">404</title><path fill="#FFD60A" d="M32 7H4c-2.209 0-4 1.791-4 4v15c0 2.209 1.791 4 4 4h11.416c.52.596 1.477 1 2.584 1s2.065-.404 2.584-1H32c2.209 0 4-1.791 4-4V11c0-2.209-1.791-4-4-4z"/><path fill="#292F33" d="M20 27c0 1.104-.896 2-2 2s-2-.896-2-2V9c0-1.104.896-2 2-2s2 .896 2 2v18z"/><path fill="#99AAB5" d="M18 26c0 1.104-.896 2-2 2H4c-1.104 0-2-.896-2-2V8c0-1.104.896-2 2-2h12c1.104 0 2 .896 2 2v18z"/><path fill="#E1E8ED" d="M18 26c-.999-1.998-3.657-2-4-2-2 0-5 2-8 2-1 0-2-.896-2-2V8c0-1.104 1-2 2-2 3.255 0 6-2 8-2 3 0 4 1.896 4 3v19z"/><path fill="#99AAB5" d="M34 26c0 1.104-.896 2-2 2H20c-1.104 0-2-.896-2-2V8c0-1.104.896-2 2-2h12c1.104 0 2 .896 2 2v18z"/><path fill="#CCD6DD" d="M18 26c.999-1.998 3.657-2 4-2 2 0 5 2 8 2 1 0 2-.896 2-2V8c0-1.104-1-2-2-2-3.256 0-6-2-8-2-3 0-4 1.896-4 3v19z"/><g fill="#292F33" transform="scale(0.24) translate(30, -28)">
+	<!-- 4 -->
+	<g transform="translate(0, 56)"><path d="M15.50 47.61L23.95 47.61L23.95 41.41L28.10 41.41L28.10 34.77L23.75 34.77L23.75 26.37L15.84 26.37L15.84 34.57L9.50 34.57L9.50 34.03L18.77 12.38L9.77 12.38L0 34.62L0 41.41L15.50 41.41Z"/></g>
+	<!-- 0 -->
+	<g transform="translate(0, 64)"><path d="M44.65 48.32C53.74 48.32 58.94 41.65 58.94 29.98C58.94 18.31 53.74 11.65 44.65 11.65C35.57 11.65 30.37 18.31 30.37 29.98C30.37 41.65 35.57 48.32 44.65 48.32ZM44.65 18.53C46.95 18.53 48.58 20.19 49.49 23.32L39.06 29.08C39.23 22.27 41.21 18.53 44.65 18.53ZM44.65 41.43C42.36 41.43 40.72 39.77 39.84 36.67L50.24 30.96C50.07 37.72 48.07 41.43 44.65 41.43Z"/></g>
+	<!-- 4 -->
+	<g transform="translate(0, 72)"><path d="M77.32 47.61L85.77 47.61L85.77 41.41L89.92 41.41L89.92 34.77L85.57 34.77L85.57 26.37L77.66 26.37L77.66 34.57L71.31 34.57L71.31 34.03L80.59 12.38L71.58 12.38L61.82 34.62L61.82 41.41L77.32 41.41Z"/></g></g>
+</svg>
+<h1 lang=fr>Ceci n’est pas une page.</h1>
+
+</header>
+
+<main>
+
+<section>
+
+<p><em>Pardon!</em> This page could not be found. Please ensure you have the right link. Error 404.</p>
+<a href="/">Back to home</a>
+
+</section>
+
+<section lang=fr>
+
+<p><em>Pardon&hairsp;!</em> Cette page est introuvable. Veuillez vérifier l’adresse. Erreur 404.</p>
+<a href="/">Retour à l’accueil</a>
+
+</section>
+
+</main>
+
+</div>
+
+<footer>
+<h1>Chris Creates Apps</h1>
+</footer>
+
+</body>
+</html>

@@ -1,65 +1,87 @@
 <!DOCTYPE html>
-<html lang="en-CA">
+<html lang=en-CA>
 <head>
-<!-- Oct 29, 2011 -->
-<meta charset=utf-8 />
+
+<meta charset=utf-8>
 <title>christophe.ca</title>
+
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 
 <style>
 
-@import url(http://fonts.googleapis.com/css?family=Cabin:600);
+:root {
+color-scheme: light;
+--dither-filter: none;
+--page-text-shadow: 0 1px 1px rgba(255,255,255,.5);
+--site-background-color: #FFD60A;
+--text-color: #000000;
+}
+
+:root[data-theme="dark"] {
+color-scheme: dark;
+--dither-filter: invert(1);
+--page-text-shadow: none;
+--site-background-color: #0E1318;
+--text-color: #E6EDF3;
+}
 
 html, body {
-	margin: 0;
-	padding: 0;
+margin: 0;
+padding: 0;
 }
 
 html {
-	background-color: rgb(255,233,2);
-	background: -moz-linear-gradient(top, rgba(255,233,2,.9), rgb(255,233,2));
-	background: -webkit-gradient(linear, left top, left bottom, from( rgba(255,233,2,.9) ), to( rgb(255,233,2) ));
-	height: 100%;
+background-color: var(--site-background-color);
+background-image: linear-gradient(to bottom, rgb(255 255 255 / 10%), transparent);
+height: 100%;
 }
 
 body {
-	background: repeat url("images/dither.png") top left;
-	color: black;
-	font-family: Helvetica Neue, Arial, serif; /* Georgia, serif;*/
-	font-size: x-large;
-	height: 100%;
-	text-shadow: 0 1px 1px rgba(255,255,255,.5); /* http://owltastic.com/2009/12/shadows-and-css3/ */
+color: var(--text-color);
+font-family: Helvetica Neue, Arial, serif;
+font-size: x-large;
+height: 100%;
+text-shadow: var(--page-text-shadow); /* Inspiration: http://owltastic.com/2009/12/shadows-and-css3/ */
+}
+
+body::before {
+background: repeat url("style/dither.svg") top left;
+content: "";
+filter: var(--dither-filter);
+inset: 0;
+pointer-events: none;
+position: fixed;
 }
 
 #page {
-	position: absolute;
-	left: 55%;
-	bottom: 30%;
+bottom: 30%;
+left: 55%;
+position: absolute;
 }
 
 h1, h2 {
-	margin: 0;
-	padding: 0;
-	font-weight: normal;
+font-weight: normal;
+margin: 0;
+padding: 0;
 }
 
 h1 {
-	color: white;
-	font-family: Segoe UI Semibold, Cabin, Helvetica Neue, Arial, serif;
-	/* font-weight: 600; */
-	text-shadow: 0px 1px 1px rgba(0,0,0,.2);
+color: white;
+font-weight: 500;
+text-shadow: 0px 1px 1px rgba(0,0,0,.2);
 }
 
 @media screen and (max-width: 1049px) {
-	h1 { font-size: 200%; }
-	h2 { font-size: 150%; }
+h1 { font-size: 200%; }
+h2 { font-size: 150%; }
 }
 @media screen and (max-width: 800px) {
-	h1 { font-size: 150%; }
-	h2 { font-size: 125%; }
+h1 { font-size: 150%; }
+h2 { font-size: 125%; }
 }
 @media screen and (max-width: 600px) {
-	h1 { font-size: 120%; }
-	h2 { font-size: 110%; }
+h1 { font-size: 120%; }
+h2 { font-size: 110%; }
 }
 
 </style>
