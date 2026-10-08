@@ -1,0 +1,547 @@
+/*
+Hello there windswept wanderer!
+
+Welcome to my sweet, sweet source code. Just for you, I've pasted in some links in
+comments to explain how I make my CSS so tasty. Feel free to use the code as a
+reference but please don't copy everything. Use my stuff as inspiration to learn
+and build your own. Now go forth; eat, drink, and be married to CSS for a while!
+
+-Chris
+
+Copyright (c) 2026 Chris Creates Apps. All rights reserved.
+If you copy without permission, karma's a bitch. You have been warned.
+*/
+
+/* Base styles: for all device sizes */
+
+/* Variables */
+:root {
+color-scheme: light dark;
+--accent-color: #FFD60A; /* vibrant yellow */
+--box-shadow-offset: .5rem;
+--content-vertical-whitespace: 1rem;
+--decoration-color: #5C6773; /* muted slate grey */
+--decoration-line-thickness: .125rem;
+--decoration-secondary-color: #CBD3DC; /* cool slate */
+--dither-filter: none;
+--dither-heading-filter: invert(1);
+--font-family-sans-serif: -apple-system, BlinkMacSystemFont, SF Pro Text, SF Pro, system-ui, sans-serif;
+--font-family-script: "Snell Roundhand", "Apple Chancery", cursive;
+--font-family-serif: Palatino, Palatino Linotype, Georgia, serif;
+--homepage-title-letter-spacing: -.06em;
+--homepage-title-text-color: var(--text-color);
+--homepage-title-text-hover-color: var(--page-background-color);
+--homepage-title-text-shadow-color: var(--page-background-color);
+--homepage-title-text-shadow-depth-color: color-mix(in srgb, var(--page-background-color) 20%, transparent);
+--homepage-title-text-shadow-hover-color: var(--text-color);
+--link-color: #094696; /* dull blue */
+--link-underline-color: color-mix(in srgb, var(--page-background-color) 50%, transparent);
+--link-visited-color: var(--decoration-color);
+--navigation-separator-gap: .5rem;
+--navigation-separator-size: .25rem;
+--page-background-color: white;
+--site-background-color: var(--accent-color);
+--text-color: black;
+--text-highlight-background-color: #FFF899; /* lemon tint */
+--text-shadow-color: color-mix(in srgb, var(--page-background-color) 50%, transparent);
+--title-background-color: #0E1318; /* inky blue-black */
+--title-letter-spacing: -.04em;
+--title-text-color: var(--page-background-color);
+}
+
+@media screen and (prefers-color-scheme: dark) {
+:root {
+--decoration-color: #8B98A5; /* muted slate grey */
+--decoration-secondary-color: #2B3542; /* steel slate */
+--dither-filter: invert(1);
+--homepage-title-text-color: var(--accent-color);
+--homepage-title-text-hover-color: var(--text-color);
+--homepage-title-text-shadow-color: var(--text-color);
+--homepage-title-text-shadow-hover-color: var(--accent-color);
+--link-color: #6E96CF; /* dull slate blue */
+--page-background-color: #171D25; /* dark slate */
+--site-background-color: var(--title-background-color);
+--text-color: #E6EDF3; /* soft white */
+--text-highlight-background-color: #383204; /* dark yellow */
+--title-text-color: var(--text-color);
+}
+}
+
+html {
+scroll-behavior: smooth;
+}
+
+html, body {
+margin: 0;
+padding: 0;
+}
+
+body {
+border-bottom: .5rem solid var(--accent-color);
+box-sizing: border-box;
+color: var(--text-color);
+font-family: var(--font-family-sans-serif);
+font-size: 120%; /* For mobile devices */
+isolation: isolate;
+line-height: 160%;
+min-height: 100svh;
+text-shadow: 0 1px 1px var(--text-shadow-color); /* http://owltastic.com/2009/12/shadows-and-css3/ */
+}
+
+body::before {
+background: repeat url("dither.svg") top left;
+content: "";
+filter: var(--dither-filter);
+inset: 0;
+pointer-events: none;
+position: fixed;
+z-index: -1;
+}
+
+::selection {
+background-color: var(--text-highlight-background-color);
+}
+
+/* ------------------------------------------------------------------------------------ */
+/* Links */
+
+a {
+border-bottom: var(--link-underline-color) 1px solid;
+color: var(--link-color);
+text-decoration: none;
+}
+
+a:visited {
+color: var(--link-visited-color);
+}
+
+a:hover {
+border-bottom: var(--text-color) 1px solid;
+color: var(--text-color);
+}
+
+a:active {
+margin-top: .2em;
+position: relative;
+top: .1em;
+}
+
+a:focus-visible {
+outline: 2px solid var(--link-color);
+outline-offset: .2em;
+}
+
+/* ------------------------------------------------------------------------------------ */
+/* Titles */
+
+.title {
+background-color: var(--title-background-color);
+box-sizing: border-box;
+color: var(--title-text-color);
+font-style: italic;
+font-weight: 900;
+isolation: isolate;
+letter-spacing: var(--title-letter-spacing);
+line-height: 100%;
+max-width: 100%;
+overflow-wrap: anywhere;
+padding: .625em;
+position: relative;
+text-shadow: 0 -.02em .02em var(--accent-color); /* Inspiration: http://owltastic.com/2009/12/shadows-and-css3/ */
+width: fit-content;
+}
+
+.title::before {
+background: repeat url("dither.svg") top left;
+content: "";
+filter: var(--dither-heading-filter);
+inset: 0;
+pointer-events: none;
+position: absolute;
+z-index: -1;
+}
+
+.title::after {
+/* Create the box shadow */
+background-color: var(--accent-color);
+clip-path: polygon(calc(100% - var(--box-shadow-offset)) 0, 100% var(--box-shadow-offset), 100% 100%, var(--box-shadow-offset) 100%, 0 calc(100% - var(--box-shadow-offset)), calc(100% - var(--box-shadow-offset)) calc(100% - var(--box-shadow-offset)));
+content: "";
+inset: 0 calc(-1 * var(--box-shadow-offset)) calc(-1 * var(--box-shadow-offset)) 0;
+pointer-events: none;
+position: absolute;
+z-index: -1;
+}
+
+.title-wordmark {
+font-size: min(1.65em, 7vw);
+margin-block-end: var(--box-shadow-offset);
+overflow-wrap: normal;
+text-box: trim-both cap alphabetic;
+text-transform: uppercase;
+}
+
+/* ------------------------------------------------------------------------------------ */
+/* Header */
+
+header {
+align-items: baseline;
+display: flex;
+flex-wrap: wrap;
+gap: 1.5rem;
+padding: 2rem 0;
+}
+
+header nav {
+flex: 1 1 auto;
+}
+
+header .links {
+justify-content: flex-end;
+margin: 0;
+}
+
+.links {
+flex-wrap: wrap;
+font-size: 90%;
+line-height: 160%;
+padding-inline: 0;
+}
+
+.links, .links li {
+align-items: baseline;
+display: flex;
+gap: var(--navigation-separator-gap);
+}
+
+.links li + li::before {
+/* Custom square bullet */
+align-self: center;
+background-color: currentColor;
+block-size: var(--navigation-separator-size);
+content: "";
+inline-size: var(--navigation-separator-size);
+}
+
+/* ------------------------------------------------------------------------------------ */
+/* Page */
+
+header, main, footer {
+padding-inline: 2rem;
+}
+
+main {
+box-sizing: border-box;
+}
+
+.page {
+overflow-wrap: anywhere;
+padding-block: 1rem;
+}
+
+.page h1, .page h2, .page h3, .page h4, .page h5 {
+letter-spacing: var(--title-letter-spacing);
+}
+
+hr {
+background-color: var(--text-color);
+border: none;
+float: left;
+height: var(--decoration-line-thickness);
+width: 9.4em;
+}
+
+.email {
+font-weight: normal;
+text-decoration: underline;
+text-decoration-color: var(--decoration-secondary-color);
+}
+
+/* ------------------------------------------------------------------------------------ */
+/* Lists */
+
+.page :where(ul, ol) {
+margin-inline: 0;
+padding-inline: 0;
+}
+
+.page ul {
+list-style-type: square;
+}
+
+.page :where(ul, ol) :where(ul, ol) {
+margin-block: var(--content-vertical-whitespace) 0;
+padding-inline-start: 1.5em;
+}
+
+/* ------------------------------------------------------------------------------------ */
+/* Content vertical whitespace */
+
+h1 {
+font-size: 200%;
+}
+
+h2 {
+font-size: 150%;
+}
+
+h3 {
+font-size: 125%;
+}
+
+h4 {
+font-size: 112.5%;
+}
+
+h5, h6 {
+font-size: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+line-height: 120%;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+margin: 0;
+}
+
+.page > :where(ul, ol, dl), .page section > :where(ul, ol, dl) {
+margin-block: 0;
+}
+
+.page > :where(:not(hr)) + :where(:not(hr)), .page section > :where(:not(hr)) + :where(:not(hr)) {
+margin-block-start: var(--content-vertical-whitespace);
+}
+
+.page :is(p, ul, ol, dl, address, table) + :is(h1, h2, h3, h4, h5, h6), .page > section + section {
+/* Double the usual gap before headings that follow body content and between
+sections, to make new topics easier to spot. Consecutive headings, such as a
+page title and its first subheading, keep the usual gap so they stay grouped. */
+margin-block-start: calc(2 * var(--content-vertical-whitespace));
+}
+
+.page > .title + :where(:not(hr)), .page section > .title + :where(:not(hr)) {
+/* Reserve the box shadow's depth as well as the content gap. */
+margin-block-start: calc(var(--content-vertical-whitespace) + var(--box-shadow-offset));
+}
+
+.page li + li {
+margin-block-start: .25em;
+}
+
+/* ------------------------------------------------------------------------------------ */
+/* Footer */
+
+footer {
+box-sizing: border-box;
+margin: 0;
+padding-block: 1rem;
+text-align: right;
+text-shadow: none;
+}
+
+footer p {
+font-size: 80%;
+line-height: 160%;
+margin-block-start: var(--content-vertical-whitespace);
+}
+
+/* ------------------------------------------------------------------------------------ */
+/* Homepage title */
+
+.homepage > header {
+background-color: var(--site-background-color);
+background-image: linear-gradient(to bottom, color-mix(in srgb, var(--site-background-color) 90%, var(--page-background-color)), var(--site-background-color));
+display: grid;
+gap: 0;
+grid-template-rows: 1fr auto;
+isolation: isolate;
+min-height: 100svh;
+padding: 0;
+position: relative;
+}
+
+.homepage > header::before {
+background: repeat url("dither.svg") top left;
+content: "";
+filter: var(--dither-filter);
+inset: 0;
+pointer-events: none;
+position: absolute;
+z-index: -1;
+}
+
+.homepage > header .links {
+font-size: 1.5rem;
+justify-content: center;
+margin: var(--content-vertical-whitespace) 0;
+}
+
+.homepage-title {
+align-self: center;
+color: var(--homepage-title-text-color);
+font-size: min(76pt, calc(20vw - .4rem));
+font-style: italic;
+font-weight: 900;
+justify-self: center;
+margin-block-end: .1em;
+max-width: calc(100% - 2rem);
+padding: 0;
+text-shadow: 0.5px 0.5px 0 var(--homepage-title-text-shadow-color),
+1px 1px 0 var(--homepage-title-text-shadow-color),
+1.5px 1.5px 0 var(--homepage-title-text-shadow-color),
+2px 2px 0 var(--homepage-title-text-shadow-color),
+2.5px 2.5px 0 var(--homepage-title-text-shadow-color),
+3px 3px 0 var(--homepage-title-text-shadow-color),
+3.5px 3.5px 0 var(--homepage-title-text-shadow-color),
+4px 4px 0 var(--homepage-title-text-shadow-color),
+4.5px 4.5px 0 var(--homepage-title-text-shadow-color),
+5px 5px 0 var(--homepage-title-text-shadow-color),
+0 .16em .3em var(--homepage-title-text-shadow-depth-color);
+text-transform: uppercase;
+transition: color 350ms ease-in-out, text-shadow 350ms ease-in-out; /* http://www.azarask.in/blog/post/animation-css-transitions-jquery-easy/ */
+width: max-content;
+}
+
+.homepage-title:hover, .homepage-title:active {
+color: var(--homepage-title-text-hover-color);
+text-shadow: 0.5px 0.5px 0 var(--homepage-title-text-shadow-hover-color),
+1px 1px 0 var(--homepage-title-text-shadow-hover-color),
+1.5px 1.5px 0 var(--homepage-title-text-shadow-hover-color),
+2px 2px 0 var(--homepage-title-text-shadow-hover-color),
+2.5px 2.5px 0 var(--homepage-title-text-shadow-hover-color),
+3px 3px 0 var(--homepage-title-text-shadow-hover-color),
+3.5px 3.5px 0 var(--homepage-title-text-shadow-hover-color),
+4px 4px 0 var(--homepage-title-text-shadow-hover-color),
+4.5px 4.5px 0 var(--homepage-title-text-shadow-hover-color),
+5px 5px 0 var(--homepage-title-text-shadow-hover-color),
+0 .16em .3em var(--homepage-title-text-shadow-depth-color);
+}
+
+.homepage-title-line {
+contain: inline-size; /* Let the second line determine the wordmark's intrinsic width. */
+display: flex;
+justify-content: space-between;
+line-height: 76%;
+}
+
+.homepage-title-line + .homepage-title-line {
+/* Adjust vertical spacing between lines for the fixed-size text shadow as the lettering shrinks. */
+padding-block-start: max(0px, calc(6px - 1vw));
+}
+
+.homepage-title-line-one, .homepage-title-line-three {
+font-size: 1.4em;
+}
+
+.homepage-title-line-one > span:not(:last-child), .homepage-title-line-three > span:not(:last-child) {
+letter-spacing: var(--homepage-title-letter-spacing);
+}
+
+.homepage-title-line-two {
+contain: none;
+display: block;
+font-kerning: normal;
+letter-spacing: var(--homepage-title-letter-spacing);
+margin-inline-end: calc(-1 * var(--homepage-title-letter-spacing));
+white-space: nowrap;
+}
+
+.homepage-title-line-three {
+margin-block-start: -.015em;
+padding-inline-start: .1em; /* Align the A's overhang with the C on the other lines. */
+}
+
+/* ------------------------------------------------------------------------------------ */
+/* Mobile: styles for narrow screens */
+
+@media screen and (width <= 20em) {
+.links {
+align-items: flex-end;
+flex-direction: column;
+}
+
+.links li + li::before {
+display: none; /* Removes the square bullets between the links */
+}
+
+.homepage > header .links {
+align-items: center;
+text-align: center;
+}
+}
+
+/* ------------------------------------------------------------------------------------ */
+/* Desktop: styles for desktop screens */
+
+@media screen and (width > 720px) {
+body {
+font-size: 130%; /* reset from above */
+}
+
+header, main, footer {
+padding-inline: max(2rem, calc((100% - 55ch) / 2));
+}
+
+.page {
+padding-block: 2em;
+}
+
+}
+
+/* ------------------------------------------------------------------------------------ */
+/* Reduced motion: styles for accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+html {
+scroll-behavior: auto;
+}
+
+.homepage-title {
+transition: none;
+}
+}
+
+/* ------------------------------------------------------------------------------------ */
+/* Print: styles for printed pages */
+
+@media print {
+:root {
+color-scheme: light;
+--box-shadow-offset: 0rem;
+--link-color: var(--text-color);
+--link-visited-color: var(--link-color);
+--page-background-color: white;
+--site-background-color: var(--page-background-color);
+--text-color: black;
+--text-shadow-color: transparent;
+--title-background-color: var(--page-background-color);
+--title-text-color: var(--text-color);
+}
+
+body {
+border-bottom: none;
+font-size: 100%;
+min-height: 0;
+}
+
+body::before, nav, .title::before, .title::after {
+display: none;
+}
+
+.homepage > header {
+background: none;
+min-height: 0;
+}
+
+.homepage-title, .homepage-title:hover, .homepage-title:active {
+color: var(--text-color);
+text-shadow: none;
+}
+
+.title {
+color: var(--text-color);
+padding: 0;
+text-shadow: none;
+}
+
+}
