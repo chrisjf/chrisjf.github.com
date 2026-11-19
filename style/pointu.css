@@ -1,0 +1,1511 @@
+/* Copyright © 2026 Chris Creates Apps. All rights reserved.
+
+Hello there windswept wanderer!
+
+Welcome to my sweet source code. Just for you, I've pasted in some links in
+comments to explain how I make my CSS so tasty. Feel free to use the code as a
+reference but please don't copy everything. Use my stuff as inspiration to learn
+and build your own. Now go forth; eat, drink, and be married to CSS for a while!
+
+-Chris
+
+P.s. If you plagiarize, payback's a slick kick in the peanuts. Metaphorically speaking. You have been warned.
+*/
+
+/* Base styles: for all device sizes */
+
+/* Variables */
+:root {
+color-scheme: light dark;
+--accent-color: #FFD60A; /* Vibrant yellow */
+--box-shadow-offset: .5rem;
+--decoration-color: #5C6773; /* Muted slate grey */
+--decoration-line-thickness: .125rem;
+--decoration-secondary-color: #CBD3DC; /* Cool slate */
+--dither-filter: none;
+--dither-heading-filter: invert(1);
+--font-family-sans-serif: -apple-system, BlinkMacSystemFont, SF Pro Text, SF Pro, system-ui, sans-serif;
+--font-family-script: "Snell Roundhand", "Apple Chancery", cursive;
+--font-family-serif: Palatino, Palatino Linotype, Georgia, serif;
+--footnote-bubble-background-color: color-mix(in srgb, var(--page-background-color) 95%, var(--accent-color));
+--footnote-bubble-inline-size: min(var(--footnote-bubble-width), calc(100% - var(--box-shadow-offset)));
+--footnote-bubble-inline-start: clamp(0px, calc(anchor(center) - var(--footnote-bubble-width) / 2), max(0px, calc(100% - var(--footnote-bubble-width) - var(--box-shadow-offset))));
+--footnote-bubble-width: calc(.6 * var(--page-column-width));
+--homepage-background-color: var(--accent-color);
+--homepage-background-top-color: color-mix(in srgb, var(--homepage-background-color) 90%, var(--page-background-color));
+--homepage-navigation-text-shadow: 0 1px 1px color-mix(in srgb, var(--page-background-color) 50%, transparent);
+--homepage-title-letter-spacing: -.06em;
+--homepage-title-text-color: var(--text-color);
+--homepage-title-text-hover-color: var(--page-background-color);
+--homepage-title-text-shadow-color: var(--page-background-color);
+--homepage-title-text-shadow-depth-color: color-mix(in srgb, var(--page-background-color) 20%, transparent);
+--homepage-title-text-shadow-hover-color: var(--text-color);
+--homepage-wave-image: url("../assets/square-waves.svg");
+--homepage-wave-opacity: .2;
+--homepage-wave-positions-before-repeat: 13;
+--link-color: #094696; /* Dull blue */
+--link-underline-color: var(--decoration-secondary-color);
+--link-underline-thickness: 1px;
+--link-visited-color: var(--decoration-color);
+--navigation-separator-gap: .5rem;
+--newsletter-animation-transition-duration: .5s;
+--newsletter-animation-transition-phase-duration: calc(var(--newsletter-animation-transition-duration) / 2);
+--newsletter-button-height: calc(1lh + var(--title-padding) * 2);
+--newsletter-form-gap: calc(var(--page-vertical-whitespace) / 2);
+--page-background-color: #F0F0F0; /* Neutral soft white */
+--page-block-whitespace: calc(2 * var(--page-vertical-whitespace));
+--page-column-width: 55ch;
+--page-gutter: 2rem;
+--page-section-whitespace: calc(3 * var(--page-vertical-whitespace));
+--page-vertical-whitespace: 1rem;
+--paper-texture: url("dither.svg");
+--text-color: black;
+--text-highlight-background-color: #FFF899; /* Lemon tint */
+--text-shadow: 0 1px 1px rgb(255 255 255 / 70%); /* Inspiration: Shadows and CSS3 by Meagan Fisher http://owltastic.com/2009/12/shadows-and-css3/ */
+--title-background-color: #0E1318; /* Inky blue-black */
+--title-letter-spacing: -.04em;
+--title-padding: .625em;
+--title-text-color: var(--page-background-color);
+--typography-scale-base: 100%;
+--typography-scale-ratio: 1.2; /* Minor Third Scale */
+--typography-scale-step-down-1: calc(var(--typography-scale-base) / var(--typography-scale-ratio)); /* ≈ 0.8333 */
+--typography-scale-step-up-1: calc(var(--typography-scale-base) * var(--typography-scale-ratio)); /* 1.2 */
+--typography-scale-step-up-2: calc(var(--typography-scale-step-up-1) * var(--typography-scale-ratio)); /* 1.44 */
+--typography-scale-step-up-3: calc(var(--typography-scale-step-up-2) * var(--typography-scale-ratio)); /* 1.728 */
+}
+
+@media screen and (prefers-color-scheme: dark) {
+
+:root {
+--decoration-color: #8B98A5; /* Muted slate grey */
+--decoration-secondary-color: #2B3542; /* Steel slate */
+--dither-filter: invert(1);
+--footnote-bubble-background-color: var(--title-background-color);
+--homepage-background-color: var(--title-background-color);
+--homepage-navigation-text-shadow: var(--text-shadow);
+--homepage-title-text-color: var(--accent-color);
+--homepage-title-text-hover-color: var(--text-color);
+--homepage-title-text-shadow-color: var(--text-color);
+--homepage-title-text-shadow-hover-color: var(--accent-color);
+--link-color: #6E96CF; /* Dull slate blue */
+--page-background-color: #171D25; /* Dark slate */
+--text-color: #E6EDF3; /* Cool soft off-white */
+--text-highlight-background-color: #383204; /* Dark yellow */
+--text-shadow: 0 -1px 1px black; /* Inspiration: Letterpress effect from CSS Secrets (book) by Lea Verou */
+--title-text-color: var(--text-color);
+}
+
+@supports (background-image: filter(url("dither.svg"), invert(1))) {
+
+:root {
+background-image: linear-gradient(var(--accent-color) 50%, transparent 50%), filter(var(--paper-texture), var(--dither-filter));
+}
+
+}
+
+}
+
+html {
+background-color: var(--page-background-color);
+scroll-behavior: smooth;
+}
+
+html:has(body.homepage) {
+background-color: var(--homepage-background-top-color);
+}
+
+body.homepage {
+/* Keep the page surface neutral while Safari tints the homepage toolbar */
+background-color: var(--homepage-background-color);
+background-image: linear-gradient(var(--page-background-color), var(--page-background-color));
+}
+
+html, body {
+margin: 0;
+padding: 0;
+}
+
+body {
+background-color: var(--page-background-color);
+border-bottom: .5rem solid var(--accent-color);
+box-sizing: border-box;
+color: var(--text-color);
+display: flex;
+flex-direction: column;
+font-family: var(--font-family-sans-serif);
+font-size: 120%; /* For mobile devices */
+isolation: isolate;
+line-height: 160%;
+min-height: 100svh;
+position: relative;
+text-shadow: var(--text-shadow);
+}
+
+/* Safari supports filter() to invert the dark mode dither texture and paints root backgrounds into over-scroll area correctly. Other browsers do not. */
+@supports (background-image: filter(url("dither.svg"), invert(1))) {
+
+html {
+/* The root background repeats beyond the page, placing its first half below the footer */
+background-image: linear-gradient(var(--accent-color) 50%, transparent 50%), var(--paper-texture);
+}
+
+}
+
+@supports not (background-image: filter(url("dither.svg"), invert(1))) {
+
+html::before {
+background-image: linear-gradient(transparent 50%, var(--accent-color) 50%);
+content: "";
+inset: 0;
+position: fixed;
+}
+
+}
+
+body::before {
+background: repeat var(--paper-texture) top left;
+content: "";
+filter: var(--dither-filter);
+inset: 0;
+pointer-events: none;
+position: absolute;
+z-index: -1;
+}
+
+::selection {
+background-color: var(--text-highlight-background-color);
+}
+
+/* ------------------------------------------------------------------------------------ */
+/* Links */
+
+a {
+border-bottom: var(--link-underline-color) var(--link-underline-thickness) solid;
+color: var(--link-color);
+text-decoration: none;
+}
+
+nav a, :is(h1, h2, h3, h4, h5, h6) a {
+border-bottom-color: transparent;
+}
+
+:is(h1, h2, h3, h4, h5, h6) a {
+--link-underline-thickness: .06em;
+}
+
+a:visited {
+color: var(--link-visited-color);
+}
+
+a:hover {
+border-bottom: var(--text-color) var(--link-underline-thickness) solid;
+color: var(--text-color);
+}
+
+a:focus-visible {
+outline: 2px solid var(--link-color);
+outline-offset: .2em;
+}
+
+/* ------------------------------------------------------------------------------------ */
+/* Titles */
+
+.title, .newsletter-form button {
+background-color: var(--title-background-color);
+box-sizing: border-box;
+color: var(--title-text-color);
+font-style: italic;
+font-weight: 900;
+isolation: isolate;
+letter-spacing: var(--title-letter-spacing);
+position: relative;
+text-shadow: 0 -.02em .02em var(--accent-color);
+}
+
+.title, .newsletter-form input, .newsletter-form button {
+line-height: 100%;
+padding: var(--title-padding);
+}
+
+.title {
+max-width: 100%;
+overflow-wrap: anywhere;
+width: fit-content;
+}
+
+.title::before, .newsletter-form button::before {
+background: repeat var(--paper-texture) top left;
+content: "";
+filter: var(--dither-heading-filter);
+inset: 0;
+pointer-events: none;
+position: absolute;
+z-index: -1;
+}
+
+.title-wordmark a::after, /* Extend the wordmark link over its padding and shadow */
+.title::after, .newsletter-form button::after, .footnote-bubble::after {
+content: "";
+inset: 0 calc(-1 * var(--box-shadow-offset)) calc(-1 * var(--box-shadow-offset)) 0;
+position: absolute;
+}
+
+.title::after, .newsletter-form button::after, .footnote-bubble::after {
+background-color: var(--accent-color); /* Box shadow */
+z-index: -1;
+}
+
+.title::after, .newsletter-form button::after { 
+background-image: linear-gradient(var(--title-background-color) 0 0); /* Black box */
+background-repeat: no-repeat;
+background-size: calc(100% - var(--box-shadow-offset)) calc(100% - var(--box-shadow-offset));
+clip-path: polygon(0 0, calc(100% - var(--box-shadow-offset)) 0, 100% var(--box-shadow-offset), 100% 100%, var(--box-shadow-offset) 100%, 0 calc(100% - var(--box-shadow-offset))); /* Box shadow + box: extend the box shadow color under the black box to prevent a seam at fractional pixels */
+z-index: -2;
+}
+
+.title:has(a:hover)::after, .newsletter-form button:hover::after {
+background-color: var(--link-color);
+}
+
+.title-wordmark a:hover, .newsletter-form button:hover {
+text-shadow: 0 -.02em .02em var(--link-color);
+}
+
+.title-wordmark:has(a:active), .newsletter-form button:active {
+/* Button pressed state: move the button face and text when pressed */
+--pressed-offset: var(--decoration-line-thickness);
+transform: translate(var(--pressed-offset), var(--pressed-offset));
+}
+
+.title-wordmark:has(a:active)::after, .newsletter-form button:active::after {
+/* Button pressed state: keep the shadow’s outer edges fixed-in-place while its inner corners follow the movement of the button face */
+background-position: var(--pressed-offset) var(--pressed-offset);
+clip-path: polygon(var(--pressed-offset) var(--pressed-offset), calc(100% - var(--box-shadow-offset) + var(--pressed-offset)) var(--pressed-offset), 100% var(--box-shadow-offset), 100% 100%, var(--box-shadow-offset) 100%, var(--pressed-offset) calc(100% - var(--box-shadow-offset) + var(--pressed-offset)));
+transform: translate(calc(-1 * var(--pressed-offset)), calc(-1 * var(--pressed-offset)));
+}
+
+.title-wordmark a:active::before {
+/* Button pressed state: keep the decorative waves fixed-in-place */
+transform: translate(calc(-1 * var(--pressed-offset)), calc(-1 * var(--pressed-offset)));
+}
+
+.title-wordmark a:active::after {
+/* Button pressed state: keep the extended link target fixed */
+inset: calc(-1 * var(--pressed-offset)) calc(var(--pressed-offset) - var(--box-shadow-offset)) calc(var(--pressed-offset) - var(--box-shadow-offset)) calc(-1 * var(--pressed-offset));
+}
+
+.title-wordmark {
+font-size: min(1.65em, 7vw);
+margin-block-end: var(--box-shadow-offset);
+max-width: calc(100% - var(--box-shadow-offset));
+overflow-wrap: normal;
+text-transform: uppercase;
+}
+
+.title-wordmark a::before {
+aspect-ratio: 1;
+background-color: var(--decoration-secondary-color);
+content: "";
+height: calc(100% + var(--box-shadow-offset) + var(--page-gutter) * 2);
+left: calc(-1 * var(--page-gutter));
+mask: url("../assets/square-waves.svg") center / contain no-repeat;
+pointer-events: none;
+position: absolute;
+top: calc(-1 * var(--page-gutter));
+z-index: -3;
+}
+
+.title-wordmark a, .title-blog a {
+border: 0;
+color: inherit;
+}
+
+.title-blog {
+border-bottom: .5rem solid var(--accent-color);
+letter-spacing: var(--title-letter-spacing);
+}
+
+.title-blog:has(a:hover) {
+border-bottom-color: var(--link-color);
+text-shadow: 0 1px 1px color-mix(in srgb, var(--link-color) 20%, transparent);
+}
+
+/* ------------------------------------------------------------------------------------ */
+/* Header */
+
+header {
+align-items: baseline;
+display: flex;
+flex-wrap: wrap;
+gap: 1.5rem;
+padding: 2rem 0 0;
+}
+
+header nav {
+flex: 1 1 auto;
+}
+
+header .links {
+justify-content: flex-end;
+margin: 0;
+}
+
+.links {
+flex-wrap: wrap;
+font-size: var(--typography-scale-step-down-1);
+line-height: 160%;
+padding-inline: 0;
+}
+
+.links, .links li {
+align-items: baseline;
+display: flex;
+gap: var(--navigation-separator-gap);
+}
+
+.links li + li::before {
+--navigation-separator-size: .25rem;
+align-self: center;
+background-color: var(--text-color);
+block-size: var(--navigation-separator-size); /* Custom square bullets */
+content: "";
+inline-size: var(--navigation-separator-size);
+}
+
+/* ------------------------------------------------------------------------------------ */
+/* Page */
+
+header, main, footer {
+padding-inline: var(--page-gutter);
+}
+
+main {
+box-sizing: border-box;
+flex: 1 0 auto;
+}
+
+.page {
+overflow-wrap: anywhere;
+padding-block: 2rem;
+}
+
+.page :is(audio, canvas, iframe, img, svg, video) {
+vertical-align: middle;
+}
+
+.page img {
+block-size: auto;
+max-inline-size: 100%;
+}
+
+fieldset {
+border: 0;
+margin: 0;
+padding: 0;
+}
+
+textarea {
+resize: vertical;
+}
+
+hr {
+border: 0;
+border-block-start: var(--decoration-line-thickness) solid var(--decoration-secondary-color);
+margin: var(--page-block-whitespace) 0;
+}
+
+.email {
+text-decoration: underline;
+text-decoration-color: var(--decoration-secondary-color);
+}
+
+abbr[title] {
+border-bottom: var(--link-underline-color) var(--link-underline-thickness) dotted;
+text-decoration: none;
+}
+
+/* ------------------------------------------------------------------------------------ */
+/* Lists */
+
+.page :where(ul, ol) {
+/* Make hanging bullets https://markboulton.co.uk/journal/five-simple-steps-to-better-typography-part-2/ */
+margin-inline: 0;
+padding-inline: 0;
+}
+
+.page ul {
+list-style-type: square; /* https://alistapart.com/article/taminglists/ */
+}
+
+.page :where(ul, ol) :where(ul, ol) {
+margin-block: 0;
+padding-inline-start: 1.5em;
+}
+
+.page .footnotes > ol > li ul,
+.page li > ul {
+list-style-position: outside;
+padding-inline-start: .9em; /* Align square bullet to parent text: Firefox & Chromium */
+}
+
+@supports (font: -apple-system-body) {
+
+.page .footnotes > ol > li ul,
+.page li > ul {
+padding-inline-start: 1em; /* Align square bullet to parent text: Safari */
+}
+
+}
+
+.page .footnotes > ol > li ol {
+list-style-position: inside;
+padding-inline-start: 0;
+}
+
+.page .footnotes > ol > li ol > li > p:first-child {
+display: inline;
+}
+
+/* ------------------------------------------------------------------------------------ */
+/* Block quotations */
+
+blockquote {
+--quotation-mark-text-gap: .125em;
+color: var(--decoration-color);
+margin: var(--page-block-whitespace) 0;
+position: relative;
+}
+
+blockquote::before, blockquote:not(:has(> p:nth-last-child(1 of :not(.footnote-bubble))))::after {
+/* Hang quotation marks in the gutters to keep the text aligned with the page. */
+color: var(--decoration-color);
+pointer-events: none;
+position: absolute;
+}
+
+blockquote::before {
+content: "\275D" / "";
+inset-block-start: 0;
+inset-inline-end: 100%;
+margin-inline-end: var(--quotation-mark-text-gap);
+}
+
+blockquote:not(:has(> p:nth-last-child(1 of :not(.footnote-bubble))))::after {
+content: "\275E" / "";
+inset-block-end: 0;
+inset-inline-start: 100%;
+margin-inline-start: var(--quotation-mark-text-gap);
+}
+
+/* Footnote bubbles are hidden siblings, not part of the quotation's ending */
+blockquote > p:nth-last-child(1 of :not(.footnote-bubble))::after {
+content: "\2060\275E" / ""; /* Zero-width word joiner character keeps the closing quote with the paragraph's last word */
+margin-inline-start: var(--quotation-mark-text-gap);
+}
+
+/* ------------------------------------------------------------------------------------ */
+/* Code blocks */
+
+pre {
+overflow-x: auto;
+}
+
+pre.chroma {
+background-color: transparent;
+}
+
+.highlight pre.chroma > code {
+display: block;
+inline-size: max-content;
+min-inline-size: 100%;
+}
+
+@supports (animation-timeline: scroll()) and (animation-range: 0px 1px) and (timeline-scope: --code-scroll) {
+
+.highlight {
+position: relative;
+timeline-scope: --code-scroll;
+}
+
+.highlight > pre.chroma {
+scroll-timeline: --code-scroll inline;
+}
+
+.highlight::after {
+--code-scroll-hint-background-color: color-mix(in srgb, var(--page-background-color) 90%, transparent);
+animation: code-scroll-hint 1ms linear both;
+animation-range: 0 4em;
+animation-timeline: --code-scroll;
+background: radial-gradient(ellipse 80px 35px at calc(100% - 2rem) 1rem, var(--code-scroll-hint-background-color) 30%, transparent 100%), linear-gradient(to right, transparent 0%, var(--code-scroll-hint-background-color) 100%);
+color: var(--decoration-color);
+content: "Scroll →" / "";
+font-size: var(--typography-scale-step-down-1);
+inset-block: 0;
+inset-inline-end: 0;
+opacity: 0;
+padding-inline: 2rem .25em;
+pointer-events: none;
+position: absolute;
+white-space: nowrap;
+}
+
+@keyframes code-scroll-hint {
+from { opacity: 1; }
+to { opacity: 0; }
+}
+
+}
+
+/* ------------------------------------------------------------------------------------ */
+/* Content vertical whitespace */
+
+h1 {
+font-size: var(--typography-scale-step-up-3);
+}
+
+h2 {
+font-size: var(--typography-scale-step-up-2);
+}
+
+h3, h4 {
+font-size: var(--typography-scale-step-up-1);
+}
+
+h5, h6 {
+font-size: var(--typography-scale-base);
+}
+
+h4, h6 {
+font-weight: 600;
+}
+
+h1, h2, h3, h4, h5, h6 {
+letter-spacing: var(--title-letter-spacing);
+line-height: 120%;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+margin: 0;
+}
+
+.page > :where(ul, ol, dl), .page section > :where(ul, ol, dl), .page blockquote > :where(ul, ol, dl),
+.page :is(.footnotes > ol > li, .footnote-bubble) > :where(blockquote, ul, ol, dl) {
+margin-block: 0;
+}
+
+.page > :where(:not(hr)) + :where(:not(hr)), .page section > :where(:not(hr)) + :where(:not(hr)), .page blockquote > :where(:not(hr)) + :where(:not(hr)),
+.page :is(.footnotes > ol > li, .footnote-bubble) > :where(:not(hr)) + :where(:not(hr)) {
+margin-block-start: var(--page-vertical-whitespace);
+}
+
+.page :is(p, ul, ol, dl, address, table) + :is(h1, h2, h3, h4, h5, h6),
+.page .footnote-bubble + :is(h1, h2, h3, h4, h5, h6), .page > section + section {
+/* Double the usual gap before headings that follow body content and between
+sections, to make new topics easier to spot. Consecutive headings, such as a
+page title and its first subheading, keep the usual gap so they stay grouped. */
+margin-block-start: var(--page-block-whitespace);
+}
+
+.page > .title + :where(:not(hr)), .page section > .title + :where(:not(hr)) {
+/* Reserve the box shadow's depth as well as the content gap. */
+margin-block-start: calc(var(--page-vertical-whitespace) + var(--box-shadow-offset));
+}
+
+.page > :where(:not(hr)) + blockquote, .page section > :where(:not(hr)) + blockquote, .page > blockquote + :where(:not(hr)), .page section > blockquote + :where(:not(hr)) {
+margin-block-start: var(--page-block-whitespace);
+}
+
+.page li + li,
+.page li > :where(ul, ol) {
+margin-block-start: .25em;
+}
+
+/* ------------------------------------------------------------------------------------ */
+/* Blog posts */
+
+/* Resolve font-relative measurements before setting the end mark's font size to zero */
+@property --halmos-end-mark-gap {
+inherits: true;
+initial-value: 0px;
+syntax: "<length>";
+}
+
+@property --halmos-end-mark-size {
+inherits: true;
+initial-value: 0px;
+syntax: "<length>";
+}
+
+.page > article > section > p:is(:last-child, :has(+ .footnotes)), .page > article > section:not(:has(> p:last-child, > p + .footnotes)) {
+--halmos-end-mark-gap: .25em;
+--halmos-end-mark-size: 1ex;
+}
+
+/* Halmos end mark */
+.page > article > section > p:is(:last-child, :has(+ .footnotes))::after, .page > article > section:not(:has(> p:last-child, > p + .footnotes))::after {
+border-block-start: var(--halmos-end-mark-size) solid var(--decoration-secondary-color); /* Draw the square in CSS instead of using the ◼︎ character because it doesn't always align with the text baseline depending on the browser (Chromium sucks!) */
+content: "\00a0\25fc" / ""; /* Nonbreaking space + square character helps keep the halmos end mark with the paragraph's last word */
+font-size: 0;
+line-height: 0;
+margin-inline-start: var(--halmos-end-mark-gap);
+position: relative;
+top: .5px; /* Nudge halmos end mark down slightly to optically align with text baseline */
+vertical-align: baseline;
+word-spacing: var(--halmos-end-mark-size); /* Give the zero-size placeholder the square's width */
+}
+
+.page > article + article {
+margin-block-start: calc(6 * var(--page-vertical-whitespace));
+}
+
+.page:has(.page-navigation) {
+/* Footer padding supplies the vertical whitespace gap below navigation */
+padding-block-end: 0;
+}
+
+.page .page-navigation {
+margin-block-start: var(--page-section-whitespace);
+}
+
+.page-navigation ul {
+display: grid;
+font-size: var(--typography-scale-step-down-1);
+gap: var(--navigation-separator-gap);
+list-style: none;
+margin-block: 0;
+}
+
+.page-navigation-previous, .page-navigation-next {
+position: relative;
+}
+
+.page-navigation-archive {
+text-align: center;
+}
+
+.page-navigation-next {
+text-align: end;
+}
+
+.page-navigation-previous a::before, .page-navigation-next a::before {
+inset-block-start: 0;
+inset-inline-end: 100%;
+margin-inline: var(--navigation-separator-gap);
+position: absolute;
+}
+
+.page-navigation-previous a::before {
+content: "\2039" / "";
+}
+
+.page-navigation-next a::before {
+content: "\203A" / "";
+inset-inline: 100% auto;
+}
+
+.page-navigation li + li {
+margin-block-start: 0;
+}
+
+.page-navigation.pagination ul {
+align-items: first baseline;
+grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.page-navigation.pagination .page-navigation-next {
+grid-column: 2;
+}
+
+.postlude, .footnotes, .footnote-reference {
+font-size: var(--typography-scale-step-down-1);
+}
+
+.postlude {
+color: var(--decoration-color);
+margin-block-start: var(--page-section-whitespace);
+}
+
+.page article hr {
+inline-size: 33.3%;
+margin-inline: auto;
+}
+
+.page .footnotes hr {
+margin-inline: 0 auto;
+}
+
+.page .footnotes > ol > li + li {
+margin-block-start: var(--page-vertical-whitespace);
+}
+
+.footnote-bubble, .footnote-reference::before, .footnote-reference::after, .footnote-reference > a::after {
+display: none;
+}
+
+@supports (anchor-scope: --footnote-number) and (left: anchor(center)) {
+
+.page > article > section {
+position: relative;
+}
+
+.footnote-bubble::before, .footnote-reference::after {
+background: var(--footnote-bubble-background-color) var(--paper-texture) repeat top left;
+position: absolute;
+}
+
+.footnote-bubble {
+box-sizing: border-box;
+color: var(--text-color);
+font-size: var(--typography-scale-step-down-1);
+line-height: 180%;
+padding: var(--page-gutter);
+position: absolute;
+z-index: 2;
+}
+
+.footnote-bubble::before {
+box-shadow: inset 0 0 0 1px var(--accent-color);
+content: "";
+inset: 0;
+pointer-events: none;
+z-index: -1;
+}
+
+.footnote-bubble::after {
+/* Extend the shadow under the background to prevent thin visual gaps at fractional pixels */
+clip-path: polygon(0 0, calc(100% - var(--box-shadow-offset)) 0, 100% var(--box-shadow-offset), 100% 100%, var(--box-shadow-offset) 100%, 0 calc(100% - var(--box-shadow-offset)));
+z-index: -2;
+}
+
+.footnote-reference > a {
+position: relative;
+}
+
+.footnote-bubble {
+inline-size: var(--footnote-bubble-inline-size);
+inset-block-start: calc(anchor(bottom) + var(--box-shadow-offset));
+inset-inline: var(--footnote-bubble-inline-start) auto;
+}
+
+.page section .footnote-bubble {
+margin-block-start: 0;
+}
+
+.footnote-reference::before, .footnote-reference::after {
+--footnote-bubble-arrow-width: 1.75rem;
+block-size: calc(2 * var(--box-shadow-offset) + var(--link-underline-thickness));
+content: "";
+inline-size: var(--footnote-bubble-arrow-width);
+inset-block-start: calc(anchor(bottom) - var(--link-underline-thickness));
+inset-inline-start: clamp(var(--footnote-bubble-inline-start), calc(anchor(center) - var(--footnote-bubble-arrow-width) / 2), calc(var(--footnote-bubble-inline-start) + var(--footnote-bubble-inline-size) - var(--footnote-bubble-arrow-width)));
+position: absolute;
+}
+
+.footnote-reference::before {
+background-color: var(--accent-color);
+clip-path: polygon(50% 0, 100% calc(var(--box-shadow-offset) + var(--link-underline-thickness)), 0 calc(var(--box-shadow-offset) + var(--link-underline-thickness)));
+z-index: 1;
+}
+
+.footnote-reference::after {
+/* The 1.2px and 2px insets approximate a 1px outline for this arrow; extend the fill over the bubble border at the join */
+clip-path: polygon(50% 1.2px, calc(100% - 2px) calc(var(--box-shadow-offset) + var(--link-underline-thickness)), 100% calc(var(--box-shadow-offset) + var(--link-underline-thickness) + 1px), 0 calc(var(--box-shadow-offset) + var(--link-underline-thickness) + 1px), 2px calc(var(--box-shadow-offset) + var(--link-underline-thickness)));
+z-index: 3;
+}
+
+.footnote-reference > a::after {
+/* Anchor the hover target to where the triangle points */
+block-size: calc(2 * var(--box-shadow-offset) + var(--link-underline-thickness));
+content: "";
+inline-size: .5em;
+inset-block-start: calc(100% - var(--link-underline-thickness));
+inset-inline-start: 50%;
+position: absolute;
+transform: translateX(-50%);
+z-index: 1;
+}
+
+@media screen and (hover: hover) {
+
+.footnote-reference:hover > a::after {
+display: block;
+}
+
+}
+
+}
+
+/* ------------------------------------------------------------------------------------ */
+/* Footer */
+
+footer {
+align-items: baseline;
+box-sizing: border-box;
+column-gap: var(--page-vertical-whitespace);
+display: flex;
+flex-wrap: wrap;
+line-height: 160%;
+margin: 0;
+padding-block: var(--page-section-whitespace);
+row-gap: var(--page-block-whitespace);
+}
+
+footer p, footer .newsletter-form {
+font-size: var(--typography-scale-step-down-1);
+}
+
+footer p {
+line-height: 1.6;
+}
+
+footer .newsletter-form {
+flex-basis: 100%;
+margin-block-end: calc(var(--page-section-whitespace) - var(--page-block-whitespace)); /* Leave a full section gap below the newsletter, plus room for the button’s box shadow */
+}
+
+footer .title-wordmark {
+font-size: min(1.125em, 7vw);
+}
+
+.made-with {
+color: var(--decoration-color);
+margin-inline-start: auto;
+text-align: right;
+}
+
+.made-with > span {
+display: inline-block;
+}
+
+/* ------------------------------------------------------------------------------------ */
+/* Homepage title */
+
+.homepage > header {
+background-color: var(--homepage-background-color);
+background-image: linear-gradient(to bottom, var(--homepage-background-top-color), var(--homepage-background-color));
+block-size: 100svh;
+display: grid;
+gap: 0;
+grid-template-rows: 1fr auto;
+isolation: isolate;
+min-block-size: min-content;
+padding: 0;
+position: relative;
+}
+
+.homepage > header::before {
+background: repeat var(--paper-texture) top left;
+content: "";
+filter: var(--dither-filter);
+inset: 0;
+pointer-events: none;
+position: absolute;
+z-index: -1;
+}
+
+.homepage > header .links {
+font-size: var(--typography-scale-step-up-1);
+justify-content: center;
+margin: var(--page-vertical-whitespace) 2rem 2rem;
+text-shadow: var(--homepage-navigation-text-shadow);
+}
+
+.homepage-title {
+align-self: center;
+box-sizing: border-box;
+color: var(--homepage-title-text-color);
+display: flex;
+flex-direction: column;
+font-size: min(76pt, calc(20vw - .4rem));
+font-style: italic;
+font-weight: 900;
+height: 100%;
+justify-content: center;
+justify-self: center;
+letter-spacing: normal;
+max-width: calc(100% - var(--page-gutter) * 2);
+padding: 0 0 .1em;
+text-shadow: 0.5px 0.5px 0 var(--homepage-title-text-shadow-color),
+1px 1px 0 var(--homepage-title-text-shadow-color),
+1.5px 1.5px 0 var(--homepage-title-text-shadow-color),
+2px 2px 0 var(--homepage-title-text-shadow-color),
+2.5px 2.5px 0 var(--homepage-title-text-shadow-color),
+3px 3px 0 var(--homepage-title-text-shadow-color),
+3.5px 3.5px 0 var(--homepage-title-text-shadow-color),
+4px 4px 0 var(--homepage-title-text-shadow-color),
+4.5px 4.5px 0 var(--homepage-title-text-shadow-color),
+5px 5px 0 var(--homepage-title-text-shadow-color),
+0 .16em .3em var(--homepage-title-text-shadow-depth-color);
+text-transform: uppercase;
+transition: color 350ms ease-in-out, text-shadow 350ms ease-in-out; /* http://www.azarask.in/blog/post/animation-css-transitions-jquery-easy/ */
+width: max-content;
+}
+
+.homepage-title:hover, .homepage-title:active {
+color: var(--homepage-title-text-hover-color);
+text-shadow: 0.5px 0.5px 0 var(--homepage-title-text-shadow-hover-color),
+1px 1px 0 var(--homepage-title-text-shadow-hover-color),
+1.5px 1.5px 0 var(--homepage-title-text-shadow-hover-color),
+2px 2px 0 var(--homepage-title-text-shadow-hover-color),
+2.5px 2.5px 0 var(--homepage-title-text-shadow-hover-color),
+3px 3px 0 var(--homepage-title-text-shadow-hover-color),
+3.5px 3.5px 0 var(--homepage-title-text-shadow-hover-color),
+4px 4px 0 var(--homepage-title-text-shadow-hover-color),
+4.5px 4.5px 0 var(--homepage-title-text-shadow-hover-color),
+5px 5px 0 var(--homepage-title-text-shadow-hover-color),
+0 .16em .3em var(--homepage-title-text-shadow-depth-color);
+}
+
+.homepage-title-line {
+contain: inline-size; /* Let the second line determine the wordmark's intrinsic width. */
+display: flex;
+justify-content: space-between;
+line-height: 76%;
+}
+
+.homepage-title-line + .homepage-title-line {
+/* Adjust vertical spacing between lines for the fixed-size text shadow as the lettering shrinks. */
+padding-block-start: max(0px, calc(6px - 1vw));
+}
+
+.homepage-title-line-one, .homepage-title-line-three,
+.homepage-title::before, .homepage-title::after {
+font-size: var(--typography-scale-step-up-2);
+}
+
+.homepage-title::before, .homepage-title::after {
+aspect-ratio: 1;
+background: var(--homepage-wave-image) center / contain no-repeat;
+content: "";
+filter: var(--dither-filter);
+line-height: 76%;
+opacity: var(--homepage-wave-opacity);
+pointer-events: none;
+z-index: -3;
+}
+
+.homepage-title::before {
+align-self: flex-start;
+flex: 1 1 0px;
+margin-block-end: var(--page-gutter);
+margin-inline-start: calc(-1 * var(--page-gutter));
+max-height: calc(1lh + var(--page-gutter) * 2);
+}
+
+.homepage-title::after {
+align-self: flex-end;
+flex: .6 1 0px;
+margin-block-start: var(--page-gutter);
+max-height: calc((1lh + var(--page-gutter) * 2) * .6);
+}
+
+.homepage-title-line-one > span:not(:last-child), .homepage-title-line-three > span:not(:last-child) {
+letter-spacing: var(--homepage-title-letter-spacing);
+}
+
+.homepage-title-line-two {
+contain: none;
+display: block;
+font-kerning: normal;
+letter-spacing: var(--homepage-title-letter-spacing);
+margin-inline-end: calc(-1 * var(--homepage-title-letter-spacing));
+white-space: nowrap;
+}
+
+.homepage-title-line-three {
+margin-block-start: -.015em;
+padding-inline-start: .1em; /* Align the A's overhang with the C on the other lines. */
+}
+
+@property --homepage-wave-clock {
+inherits: false;
+initial-value: 0;
+syntax: "<number>";
+}
+
+@property --homepage-wave-startup {
+inherits: false;
+initial-value: 0;
+syntax: "<number>";
+}
+
+.homepage > header {
+overflow: clip;
+}
+
+.homepage-title::before, .homepage-title::after {
+animation: homepage-opening-wave-rise 18s cubic-bezier(.42, 0, .72, .72) .6s forwards;
+}
+
+.homepage > header::after {
+--homepage-first-wave: calc(2 * var(--homepage-wave-progress));
+--homepage-first-wave-size: clamp(2rem, 12svh, 7rem);
+--homepage-fourth-wave: calc(var(--homepage-fourth-wave-speed) * var(--homepage-wave-progress) - var(--homepage-fourth-wave-offset));
+--homepage-fourth-wave-offset: .82;
+--homepage-fourth-wave-size: calc(var(--homepage-first-wave-size) * .42);
+--homepage-fourth-wave-speed: 3;
+--homepage-second-wave: calc(var(--homepage-second-wave-speed) * var(--homepage-wave-progress) - var(--homepage-second-wave-offset));
+--homepage-second-wave-offset: .27;
+--homepage-second-wave-size: calc(var(--homepage-first-wave-size) * .55);
+--homepage-second-wave-speed: 3;
+--homepage-third-wave: calc(var(--homepage-third-wave-speed) * var(--homepage-wave-progress) - var(--homepage-third-wave-offset));
+--homepage-third-wave-offset: .58;
+--homepage-third-wave-size: calc(var(--homepage-first-wave-size) * .72);
+--homepage-third-wave-speed: 4;
+--homepage-wave-cycle-duration: 60s;
+--homepage-wave-delay: 2.5s;
+--homepage-wave-horizontal-shift: calc(5 / var(--homepage-wave-positions-before-repeat));
+--homepage-wave-lane-width: .25;
+--homepage-wave-progress: calc(var(--homepage-wave-clock) * var(--homepage-wave-positions-before-repeat));
+--homepage-wave-startup-clock: calc(var(--homepage-wave-startup) * var(--homepage-wave-startup-clock-end));
+--homepage-wave-startup-clock-end: .3;
+animation: homepage-wave-stream calc(var(--homepage-wave-positions-before-repeat) * var(--homepage-wave-cycle-duration)) linear var(--homepage-wave-delay) infinite, homepage-wave-arrivals calc(var(--homepage-wave-startup-clock-end) * var(--homepage-wave-cycle-duration)) linear var(--homepage-wave-delay) forwards;
+background-image: var(--homepage-wave-image), var(--homepage-wave-image), var(--homepage-wave-image), var(--homepage-wave-image);
+background-position:
+calc(100% * var(--homepage-wave-lane-width) * (0 + mod(.72 + var(--homepage-wave-horizontal-shift) * mod(round(down, var(--homepage-first-wave), 1), var(--homepage-wave-positions-before-repeat)), 1)))
+calc(100% + var(--homepage-first-wave-size) - (100% + 2 * var(--homepage-first-wave-size)) * mod(var(--homepage-first-wave), 1)),
+calc(100% * var(--homepage-wave-lane-width) * (1 + mod(.4 + var(--homepage-wave-horizontal-shift) * mod(round(down, var(--homepage-second-wave), 1), var(--homepage-wave-positions-before-repeat)), 1)))
+calc(100% + var(--homepage-second-wave-size) - (100% + 2 * var(--homepage-second-wave-size)) * mod(var(--homepage-second-wave), 1)),
+calc(100% * var(--homepage-wave-lane-width) * (2 + mod(.52 + var(--homepage-wave-horizontal-shift) * mod(round(down, var(--homepage-third-wave), 1), var(--homepage-wave-positions-before-repeat)), 1)))
+calc(100% + var(--homepage-third-wave-size) - (100% + 2 * var(--homepage-third-wave-size)) * mod(var(--homepage-third-wave), 1)),
+calc(100% * var(--homepage-wave-lane-width) * (3 + mod(.56 + var(--homepage-wave-horizontal-shift) * mod(round(down, var(--homepage-fourth-wave), 1), var(--homepage-wave-positions-before-repeat)), 1)))
+calc(100% + var(--homepage-fourth-wave-size) - (100% + 2 * var(--homepage-fourth-wave-size)) * mod(var(--homepage-fourth-wave), 1));
+background-repeat: no-repeat;
+background-size:
+var(--homepage-first-wave-size),
+calc(var(--homepage-second-wave-size) * max(0, sign(var(--homepage-wave-startup-clock) * var(--homepage-second-wave-speed) - var(--homepage-second-wave-offset)))),
+calc(var(--homepage-third-wave-size) * max(0, sign(var(--homepage-wave-startup-clock) * var(--homepage-third-wave-speed) - var(--homepage-third-wave-offset)))),
+calc(var(--homepage-fourth-wave-size) * max(0, sign(var(--homepage-wave-startup-clock) * var(--homepage-fourth-wave-speed) - var(--homepage-fourth-wave-offset))));
+content: "";
+filter: var(--dither-filter);
+inset: 0;
+mask-image: linear-gradient(to bottom, black 88%, transparent);
+opacity: var(--homepage-wave-opacity);
+pointer-events: none;
+position: absolute;
+z-index: -2;
+}
+
+@keyframes homepage-opening-wave-rise {
+to { translate: 0 calc(-100svh - 100%); }
+}
+
+@keyframes homepage-wave-stream {
+from { --homepage-wave-clock: 0; }
+to { --homepage-wave-clock: 1; }
+}
+
+@keyframes homepage-wave-arrivals {
+from { --homepage-wave-startup: 0; }
+to { --homepage-wave-startup: 1; }
+}
+
+/* ------------------------------------------------------------------------------------ */
+/* Newsletter form */
+
+.newsletter-form {
+display: grid;
+gap: var(--newsletter-form-gap);
+grid-template-columns: minmax(0, 1fr) auto auto;
+padding-block-end: var(--box-shadow-offset);
+}
+
+.newsletter-form label {
+align-self: baseline;
+grid-area: label;
+text-box: trim-end cap text;
+}
+
+a.web-feed-icon {
+align-self: baseline;
+border: 0;
+grid-area: feed-icon;
+translate: 0 .5px; /* Nudge icon down slightly to optically align with text baseline */
+}
+
+.web-feed-icon img {
+block-size: 1cap;
+display: block;
+filter: var(--dither-filter);
+}
+
+.web-feed-icon::after {
+--feed-icon-background-size: calc(1cap + 2 * var(--feed-icon-padding));
+--feed-icon-padding: .25em;
+--feed-icon-shadow-offset: calc(var(--box-shadow-offset) / 3);
+block-size: calc(var(--feed-icon-background-size) + var(--feed-icon-shadow-offset));
+clip-path: polygon(0 0, calc(100% - var(--feed-icon-shadow-offset)) 0, 100% var(--feed-icon-shadow-offset), 100% 100%, var(--feed-icon-shadow-offset) 100%, 0 calc(100% - var(--feed-icon-shadow-offset)));
+content: ""; /* Keep the box shadow area part of the hover target */
+inset: calc(-1 * var(--feed-icon-padding)) calc(-1 * (var(--feed-icon-padding) + var(--feed-icon-shadow-offset))) auto calc(-1 * var(--feed-icon-padding));
+position: absolute;
+z-index: -1;
+}
+
+@media screen and (hover: hover) {
+
+.web-feed-icon:hover img {
+filter: invert(1);
+}
+
+.web-feed-icon:hover::after {
+background: linear-gradient(var(--title-background-color) 0 0) top left / var(--feed-icon-background-size) var(--feed-icon-background-size) no-repeat var(--accent-color);
+}
+
+}
+
+.newsletter-form input, .newsletter-form button {
+font-family: inherit;
+font-size: inherit;
+}
+
+.newsletter-form input {
+background-color: var(--page-background-color);
+border: var(--decoration-line-thickness) solid var(--decoration-secondary-color);
+box-sizing: border-box;
+}
+
+.newsletter-email {
+grid-area: email;
+}
+
+.newsletter-first-name {
+grid-area: first-name;
+opacity: 0;
+transition: display var(--newsletter-animation-transition-duration) allow-discrete, opacity var(--newsletter-animation-transition-duration) ease-out;
+}
+
+.newsletter-form:has(.newsletter-email:not(:placeholder-shown), .newsletter-first-name:is(:focus, :not(:placeholder-shown))) .newsletter-first-name {
+display: block;
+opacity: 1;
+
+@starting-style {
+opacity: 0;
+}
+
+}
+
+.newsletter-form input:focus-visible {
+border-color: var(--link-color);
+outline: 0;
+}
+
+.newsletter-form button {
+appearance: none;
+border: 0;
+cursor: pointer;
+grid-area: button;
+justify-self: start;
+margin-inline-end: var(--box-shadow-offset);
+}
+
+/* ------------------------------------------------------------------------------------ */
+/* Mobile: styles for narrow screens */
+
+@media screen and (width <= 720px) {
+
+header {
+row-gap: 2rem;
+}
+
+.page > section > h2:first-child, .page > article > section > h2:first-child {
+text-box: trim-start cap alphabetic;
+}
+
+footer {
+padding-block-end: var(--page-gutter);
+}
+
+.newsletter-form {
+container-type: inline-size;
+grid-template-areas: "label label feed-icon" "email . ." "first-name first-name first-name" ". button button";
+grid-template-rows: auto auto minmax(0, 0fr) 0px;
+row-gap: 0;
+transition: grid-template-rows var(--newsletter-animation-transition-phase-duration) ease-in-out var(--newsletter-animation-transition-phase-duration);
+}
+
+.newsletter-email, .newsletter-first-name, .newsletter-form button {
+margin-block-start: var(--newsletter-form-gap);
+}
+
+.newsletter-email {
+inline-size: 100%;
+transition: inline-size var(--newsletter-animation-transition-phase-duration) ease-out;
+}
+
+.newsletter-first-name {
+transition-duration: var(--newsletter-animation-transition-duration), var(--newsletter-animation-transition-phase-duration);
+}
+
+.newsletter-form button {
+align-self: end;
+block-size: var(--newsletter-button-height);
+inset-inline-start: 0;
+transition: block-size var(--newsletter-animation-transition-phase-duration) ease-in-out var(--newsletter-animation-transition-phase-duration), inset-inline-start var(--newsletter-animation-transition-phase-duration) ease-out;
+}
+
+.newsletter-form:where(:not(:has(.newsletter-email:not(:placeholder-shown), .newsletter-first-name:is(:focus, :not(:placeholder-shown))))) button {
+block-size: calc(var(--newsletter-button-height) + 2 * var(--decoration-line-thickness));
+line-height: normal;
+}
+
+.newsletter-form:has(.newsletter-email:not(:placeholder-shown), .newsletter-first-name:is(:focus, :not(:placeholder-shown))) {
+grid-template-rows: auto auto minmax(0, 1fr) calc(var(--newsletter-button-height) + var(--newsletter-form-gap));
+transition-delay: 0s; /* Move the button below the text boxes before widening the email text box */
+
+& .newsletter-email {
+inline-size: 100cqi;
+transition-delay: var(--newsletter-animation-transition-phase-duration);
+}
+
+& .newsletter-first-name, & button {
+transition-delay: 0s, var(--newsletter-animation-transition-phase-duration);
+}
+
+& button {
+inset-inline-start: calc(100% - 100cqi);
+}
+}
+
+}
+
+@media screen and (width <= 440px) {
+
+.newsletter-form {
+grid-template-areas: "label label feed-icon" "email email email" "first-name first-name first-name" "button button button";
+grid-template-rows: auto auto minmax(0, 0fr) auto;
+transition: grid-template-rows var(--newsletter-animation-transition-duration) ease-in;
+}
+
+.newsletter-form button {
+block-size: auto;
+line-height: 100%;
+}
+
+.newsletter-form:has(.newsletter-email:not(:placeholder-shown), .newsletter-first-name:is(:focus, :not(:placeholder-shown))) {
+grid-template-rows: auto auto minmax(0, 1fr) auto;
+transition-timing-function: ease-out;
+}
+
+}
+
+@media screen and (width <= 320px) {
+
+.links {
+align-items: flex-end;
+flex-direction: column;
+}
+
+.links li + li::before {
+display: none; /* Removes the square bullets between the links */
+}
+
+.homepage > header .links {
+align-items: center;
+text-align: center;
+}
+
+.title-blog {
+font-size: min(var(--typography-scale-step-up-3), 10vw);
+}
+
+}
+
+/* ------------------------------------------------------------------------------------ */
+/* Desktop: styles for desktop screens */
+
+@media screen and (width > 720px) {
+
+body {
+font-size: 130%; /* reset from above */
+}
+
+header, main, footer {
+padding-inline: max(var(--page-gutter), calc((100% - var(--page-column-width)) / 2));
+}
+
+.page {
+padding-block-start: var(--page-section-whitespace);
+}
+
+.page-navigation ul {
+align-items: first baseline;
+grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.page-navigation-previous {
+grid-column: 1;
+}
+
+.page-navigation-archive {
+grid-column: 2;
+}
+
+.page-navigation-next {
+grid-column: 3;
+}
+
+.newsletter-form {
+grid-template-areas: "label label label feed-icon" "email first-name button button";
+grid-template-columns: minmax(0, 1fr) minmax(0, 0fr) auto auto;
+transition: grid-template-columns var(--newsletter-animation-transition-duration) ease-out;
+}
+
+.newsletter-email {
+/* Reclaim the extra column gap while the name column is collapsed. */
+margin-inline-end: calc(-1 * var(--newsletter-form-gap));
+transition: margin-inline-end var(--newsletter-animation-transition-duration) ease-out;
+}
+
+.newsletter-form:has(.newsletter-email:not(:placeholder-shown), .newsletter-first-name:is(:focus, :not(:placeholder-shown))) {
+grid-template-columns: minmax(0, 1fr) minmax(0, .7fr) auto auto;
+
+& .newsletter-email {
+margin-inline-end: 0;
+}
+
+}
+
+}
+
+/* ------------------------------------------------------------------------------------ */
+/* Reduced motion: styles for accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+
+:root {
+--newsletter-animation-transition-duration: 0s;
+}
+
+html {
+scroll-behavior: auto;
+}
+
+.highlight::after {
+animation-range: 0px 1px;
+animation-timing-function: steps(1, end);
+}
+
+.homepage-title {
+transition: none;
+}
+
+.homepage-title::before, .homepage-title::after {
+animation: none;
+}
+
+.homepage > header::after {
+display: none;
+}
+
+}
+
+/* ------------------------------------------------------------------------------------ */
+/* Print: styles for printed pages */
+
+@media print {
+
+:root {
+background: none;
+color-scheme: light;
+--box-shadow-offset: 0rem;
+--link-color: var(--text-color);
+--link-visited-color: var(--link-color);
+--page-background-color: white;
+--text-color: black;
+--text-shadow: none;
+--title-background-color: var(--page-background-color);
+--title-text-color: var(--text-color);
+}
+
+html:has(body.homepage) {
+background: none;
+}
+
+body {
+border-bottom: none;
+display: block;
+font-size: 100%;
+min-height: 0;
+}
+
+html::before, body::before, nav, .title::before, .title::after, .title-wordmark a::before, .newsletter-form, .homepage > header::after {
+display: none;
+}
+
+hr {
+border-block-start-color: var(--text-color);
+}
+
+abbr[title]::after {
+content: " (" attr(title) ")";
+}
+
+h1, h2, h3, h4, h5, h6 {
+break-after: avoid;
+}
+
+p, h2, h3 {
+orphans: 3;
+widows: 3;
+}
+
+blockquote, pre, tr, img {
+break-inside: avoid;
+}
+
+pre {
+overflow: visible;
+overflow-wrap: anywhere;
+white-space: pre-wrap;
+}
+
+.highlight pre.chroma > code {
+inline-size: auto;
+min-inline-size: 0;
+}
+
+.highlight::after {
+display: none;
+}
+
+pre code .hl {
+print-color-adjust: exact;
+}
+
+.page a[data-url]::after {
+content: " (" attr(data-url) ")";
+}
+
+blockquote {
+print-color-adjust: exact;
+}
+
+blockquote a:any-link {
+color: inherit;
+}
+
+.page > article > section > p:is(:last-child, :has(+ .footnotes))::after, .page > article > section:not(:has(> p:last-child, > p + .footnotes))::after {
+border-block-start-color: var(--text-color); /* Halmos end mark */
+}
+
+.homepage > header {
+background: none;
+block-size: auto;
+}
+
+.homepage-title::before, .homepage-title::after {
+display: none;
+}
+
+.homepage-title, .homepage-title:hover, .homepage-title:active {
+color: var(--text-color);
+text-shadow: none;
+}
+
+.title, .title-blog, .title-wordmark a, .title-wordmark a:hover, .title-blog a {
+color: var(--text-color);
+padding: 0;
+text-shadow: none;
+}
+
+}

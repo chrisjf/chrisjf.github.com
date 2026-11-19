@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="20 20 460 460">
+<!-- Copyright © 2026 Chris Creates Apps. All rights reserved. -->
+<defs>
+<path id="wave" d="M -26 0
+q 11.5 -10 23 0 t 23 0 t 23 0 t 23 0 t 23 0
+t 23 0 t 23 0 t 23 0 t 23 0 t 23 0
+t 23 0 t 23 0 t 23 0 t 23 0 t 23 0
+t 23 0 t 23 0 t 23 0 t 23 0 t 23 0
+t 23 0 t 23 0 t 23 0 t 23 0" fill="none" stroke="#000000" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" />
+</defs>
+<use href="#wave" y="34.375" />
+<use href="#wave" y="63.125" />
+<use href="#wave" y="91.875" />
+<use href="#wave" y="120.625" />
+<use href="#wave" y="149.375" />
+<use href="#wave" y="178.125" />
+<use href="#wave" y="206.875" />
+<use href="#wave" y="235.625" />
+<use href="#wave" y="264.375" />
+<use href="#wave" y="293.125" />
+<use href="#wave" y="321.875" />
+<use href="#wave" y="350.625" />
+<use href="#wave" y="379.375" />
+<use href="#wave" y="408.125" />
+<use href="#wave" y="436.875" />
+<use href="#wave" y="465.625" />
+</svg>
